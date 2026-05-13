@@ -1,0 +1,79 @@
+body {
+  background-color: bisque;
+}
+
+.mainPage {
+  display: flex;
+}
+
+.grid {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgb(221, 133, 26);
+  display: grid;
+  grid-template-rows: 300px 300px;
+  grid-template-columns: 300px 300px;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+  flex-grow: 1;
+}
+
+.header {
+  grid-column: 1/3;
+  grid-row: 1;
+  background-color: purple;
+  text-align: center;
+  padding: 30px;
+  color: white;
+  border-radius: 15px;
+}
+
+.mainSection {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: purple;
+  text-align: center;
+  padding: 30px;
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+}
+
+.sideBar {
+  grid-column: 2;
+  grid-row: 2;
+  background-color: purple;
+  text-align: center;
+  padding: 30px;
+  color: white;
+  border-radius: 15px;
+  position: relative;
+}
+
+.positionAbsolute {
+  position: absolute;
+  top: 13px;
+  left: 180px;
+  color: yellow;
+}
+
+.footer {
+  grid-column: 1/3;
+  grid-row: 3;
+  background-color: purple;
+  text-align: center;
+  padding: 30px;
+  color: white;
+  border-radius: 15px;
+}
+
+/* Non ho molti commenti da fare perchè.. è molto semplice! ma sono disposto a spiegare, anche in live, passo per passo che cosa succede all'interno della pagina e di VSCode (parte HTML & CSS) */

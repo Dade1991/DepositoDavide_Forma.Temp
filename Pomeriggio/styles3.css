@@ -99,6 +99,7 @@ Flexbox ora è attivo, e posso modificare gli elementi figli al suo interno ed a
 }
 
 /* Nuovo esempio che non avevo ancora esplorato di Area container */
+/* Credo di averne capito il funzionamento: nel padre si  */
 
 .gridTemplateAreaContainer {
   justify-content: center;
