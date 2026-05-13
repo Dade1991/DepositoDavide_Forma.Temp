@@ -1,0 +1,131 @@
+/* Imposto al div "padre" position relative per fornire ai suoi relativi div "figli" un anchor point a cui poter fare riferimento a livello spaziale.
+Ciò significa che con il div figlio, on position absolute, potremo controllare il corretto e preciso posizionamento degli elementi (sempre all'interno e solo del div padre o dell'interno body, view port) */
+
+.contenitore {
+  background-color: aquamarine;
+  position: relative;
+  width: 500px;
+  height: 250px;
+}
+
+.box {
+  background-color: burlywood;
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
+
+/* Imposto al div "padre", qui di seguito, il display: flex.
+Flexbox ora è attivo, e posso modificare gli elementi figli al suo interno ed avere più controllo sul loro posizionamento */
+/* Esistono diverse "configurazioni" da poter imporre all'elemento (sia padre che figli) che ha ricevuto Flexbox. Per esempio space-around o space-between modificano, ognuno in un modo differente, la disposizione tra gli elementi figli */
+
+.flexBoxContainer {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: bisque;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+}
+
+.flexBoxItem {
+  border: 1px solid black;
+  padding: 20px 50px 20px 50px;
+  border-radius: 15px;
+  background-color: cadetblue;
+  color: white;
+}
+
+/* Di seguito vederemo come strutturare una griglia, grid che potrà essere gestita a livello stilistico */
+/* La tabella o Grid, e gli elementi al suo interno, possono essere modificati per ordinare gli items al suo interno: gap (spazio tra gli elementi figli della grid), grid-template-columns (identifica quanto possano e debbano "espandersi" gli elementi figli della tabella) */
+
+.gridBoxContainer {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgb(255, 162, 48);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  gap: 40px;
+  height: 150px;
+}
+
+.gridItem {
+  border: 1px solid black;
+  background-color: rgb(77, 77, 219);
+  color: white;
+  text-align: center;
+  border-radius: 15px;
+  align-content: center;
+}
+
+/* Non molto da aggiungere rispetto alle grid sopra spiegate: semplicemente in questo esempio abbiamo il controllo degli items all'interno della tabella, delle sue righe e delle sue colonne */
+
+.grid2BoxContainer {
+  justify-content: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgb(51, 231, 120);
+  display: grid;
+  grid-template-rows: 150px 150px 150px;
+  grid-template-columns: 150px 150px 150px;
+  gap: 20px;
+}
+
+/* tag per stili applicabili a tutti gli items della griglia */
+
+.gridItem2 {
+  background-color: blueviolet;
+  text-align: center;
+  border-radius: 15px;
+  align-content: center;
+  color: white;
+}
+
+/* esempi con tag più specifici per ogni item */
+
+.grid2Item1 {
+  grid-column: 1/3;
+  grid-row: 1;
+}
+
+.grid2Item2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.grid2Item6 {
+  grid-column: 2;
+}
+
+/* Nuovo esempio che non avevo ancora esplorato di Area container */
+
+.gridTemplateAreaContainer {
+  justify-content: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgb(230, 189, 57);
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
+}
