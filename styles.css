@@ -1,0 +1,90 @@
+p {
+  color: blue;
+}
+
+/* Vista la logica a "cascata", verrà applicata l'ultima regola (di uguale priorità) a disposizione, in questo caso "RED" qui a basso */
+
+p {
+  color: red;
+}
+
+/* Ordine di applicazione delle regole CSS: - Ereditarietà, Generics, Classi, ID, In-line, !important */
+
+div {
+  color: green;
+}
+
+.testo {
+  color: orange;
+}
+
+#titolo {
+  color: red;
+}
+
+/* Per dimostrare l'ereditarietà ho applicato al body uno stile che si è riverberato su tutti gli elementi inclusi al suo interno, appunto: ereditano tutte questo stile appena attribuito perchè non ci sono altri stili simili gia applicati */
+
+body {
+  font-size: 2rem;
+
+  /* aggiungo altri attributi al body in accordo agli esempi */
+
+  background-color: #9ae6e6;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.box {
+  background-color: greenyellow;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Esempio di selettori più specifici utilizzando ">" per indicare su quale tag/elemento stiamo intervenendo */
+
+.box > h2 {
+  color: blue;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.box > p {
+  color: brown;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Creato nuovo div per dimostrare width ed height del div in oggetto */
+
+/* Margin (top), gia incluso per esercizio margin */
+
+.esercizioDimensioni {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  width: 200px;
+  height: 100px;
+  background-color: rgb(18, 151, 196);
+}
+
+/* Creato nuovo div per dimostrare il padding per il div in oggetto */
+
+/* Margin (top), gia incluso per esercizio margin */
+
+.esercizioDimensioni2 {
+  margin-top: 3rem;
+  padding: 20px;
+  background-color: lightgreen;
+}
+
+/* Creato nuovo div per dimostrare il border per il div in oggetto */
+
+/* Margin (top), gia incluso per esercizio margin */
+
+.esercizioDimensioni3 {
+  margin-top: 3rem;
+  padding: 50px;
+  border: 5px solid black;
+  background-color: rgb(201, 20, 162);
+}
