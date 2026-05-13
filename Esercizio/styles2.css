@@ -88,5 +88,9 @@ section:hover {
 /* Impedisce al footer di rimpicciolirsi e/o modificarsi */
 
 footer {
+  text-align: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 2rem;
+  color: white;
   flex-shrink: 0;
 }
