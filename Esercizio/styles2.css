@@ -1,0 +1,76 @@
+/* applico uno stile di font all'intero body dell'HTML */
+
+body {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background-image: linear-gradient(rgb(228, 132, 132), rgb(92, 92, 221));
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Imposto stili per i titoli (h), tutto il testo sarà centrato */
+
+h1,
+h2 {
+  font-size: 2rem;
+}
+
+h1 {
+  color: red;
+  text-align: center;
+}
+
+h2 {
+  color: orange;
+  text-align: center;
+}
+
+/* qui ho creato una sezione principale a cui vengono applicati stili sul bordo, radius, shadow, margini per distanziamentoed infine il tempo impostato per la transiozione quando si attiverà l'hover*/
+
+section {
+  background-color: rgba(255, 255, 255, 0.685);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin-left: 30px;
+  margin-right: 30px;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+section .divParag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.parag {
+  text-align: justify;
+  margin: 15px;
+  color: blue;
+}
+
+.para2 {
+  color: green;
+}
+
+.para3 {
+  color: rgb(124, 0, 128);
+}
+
+/* Divisorio elegante tra i div, rientra negli elementi d'impaginazione */
+
+hr {
+  text-align: center;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Hover applicato alla sezione Section che, assieme all'attributo impostato in precedenza, trasformera della scala indicata l'elemento considerato */
+
+section:hover {
+  transform: scale(1.05);
+}
