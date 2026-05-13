@@ -49,7 +49,7 @@ section {
 
 /* Utilizzo d-flex per paginazione avanzata ed ordinata */
 
-section .divParag {
+.divParag {
   display: flex;
   justify-content: center;
   align-items: center;
