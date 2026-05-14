@@ -1,10 +1,13 @@
-html {
-  height: 100%;
+:root {
+  --background-main-color: antiquewhite;
+  --background-secondary-color: white;
+  --text-color: black;
+  --secondary-color: aquamarine;
 }
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: antiquewhite;
+  background-color: var(--background-main-color);
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -16,7 +19,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--background-secondary-color);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -34,7 +37,7 @@ header {
   text-decoration: none;
   font-weight: bold;
   font-size: 1.3rem;
-  color: black;
+  color: var(--text-color);
   display: inline-block;
   transition: transform 0.2s ease-in-out;
 }
@@ -107,7 +110,7 @@ ul > li {
 }
 
 button {
-  background-color: aquamarine;
+  background-color: var(--secondary-color);
   padding: 10px 20px 10px 20px;
   border-radius: 10px;
 }
