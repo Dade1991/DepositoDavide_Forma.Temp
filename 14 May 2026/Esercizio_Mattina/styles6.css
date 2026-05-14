@@ -118,6 +118,8 @@ button {
 footer {
   text-align: center;
   font-weight: bold;
+  background-color: var(--background-secondary-color);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Hidden & None */
