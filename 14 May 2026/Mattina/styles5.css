@@ -1,0 +1,78 @@
+/* All'interno di ":root" definiamo noi i nomi con cui richiamare le variabili. ":root" è come se fosse una lista degli stili da noi desiderati/richiesti accessibili e visibili fin da subito */
+
+:root {
+  --main-color: #3469db;
+  --text-color: #ec1000;
+  --space: 20px;
+  --space-max: 60px;
+}
+
+/* Di seguito, utilizziamo i classici selettori per intervenire graficamente sulle porzioni di HTML da noi indicate (come avviene normalmente) ma potremo utilizzare le variabili definite sopra (richiamandole).
+Questo consente di avere più ordine e preparazione sugli stili grafici */
+
+.card {
+  background-color: var(--main-color);
+  padding: var(--space);
+  color: white;
+  margin-top: var(--space-max);
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+.message::before {
+  content: "⚠ ";
+  color: red;
+}
+
+.message::after {
+  content: " ✔";
+  color: green;
+}
+
+/* Animazioni e Transazioni */
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: steelblue;
+  transition: transform 0.5s;
+  animation: colorChange 3s infinite;
+  border-radius: 20px;
+}
+
+.box:hover {
+  transform: scale(1.2);
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: steelblue;
+  }
+
+  50% {
+    background-color: coral;
+  }
+
+  100% {
+    background-color: steelblue;
+  }
+}
+
+/* Display & Visibility: Ho volutamente commentato visibility: hidden & display: none. Per attivare le loro proprietà, scommentare */
+
+.box1 {
+  display: block;
+  background-color: lightblue;
+}
+
+.box2 {
+  /* visibility: hidden; */
+  background-color: lightgreen;
+}
+
+.box3 {
+  /* display: none; */
+  background-color: coral;
+}
