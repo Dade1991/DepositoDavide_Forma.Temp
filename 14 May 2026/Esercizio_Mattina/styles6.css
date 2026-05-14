@@ -1,5 +1,6 @@
 :root {
   --background-main-color: antiquewhite;
+  --background-main-card-color: rgba(252, 220, 180, 0.836);
   --background-secondary-color: white;
   --text-color: black;
   --secondary-color: aquamarine;
@@ -89,6 +90,7 @@ ul > li {
     transform 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  background-color: var(--background-main-card-color);
 }
 
 .card:hover {
