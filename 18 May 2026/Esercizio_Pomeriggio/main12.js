@@ -4,7 +4,7 @@ const prompt = require("prompt-sync")()
 
 let numbers = []
 
-// Inserimento numeri da utente (mentre è vero, ed è sempre vero fino a che non si digita 0, rimane in ascolto di input utenti)
+// Inserimento numeri da utente (mentre è vero, ed è sempre vero fino a che non si digita 0 > break, rimane in ascolto di input utenti)
 
 while (true) {
   let userInput = prompt(
@@ -43,10 +43,18 @@ let even = []
 let odd = []
 let sum = 0
 
-// Gestisco gli eventuali errori se l'array fosse vuoto: restitusco null
+// Inizializzo variabili per valori min & max
 
 let min = null
 let max = null
+
+// Ciclo il numero appena inserito nell'array numeri e:
+
+// - Sommo tra di loro tutti i numeri nell'array principale (prende il valore della somma precedente ed aggiunge l'ultimo numero inserito, restiuisce la somma inclusa dell'ultimo input)
+// - Verifico ed organizzo in array numeri pari
+// - Verifico ed organizzo in array numeri dispari
+// - Verifico ed modifico valore in varibile numero min
+// - Verifico ed modifico valore in varibile numero max
 
 for (number of numbers) {
   // Qui sommo tutti i numeri che aggiungo mano a mano in maniera "automatica"
@@ -89,3 +97,9 @@ if (numbers.length > 0) {
 } else {
   console.log("No number inserted.")
 }
+
+// Se volessimo ricercare un indice particolare all'interno dell'array, possiamo utilizzare il nome dell'array e l'indice tra [] del valore che ci serve:
+
+console.log(numbers[3])
+
+// L'extra non l'ho fatto perchè ero ancora a telefono con la municipale :(
