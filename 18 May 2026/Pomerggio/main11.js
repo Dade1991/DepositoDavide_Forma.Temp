@@ -81,3 +81,37 @@ let person = { name: "Mario", age: 30 }
 for (let key in person) {
   console.log("Valore in array: " + key, person[key])
 }
+
+// Funzioni
+
+function sum2(a, b) {
+  return a + b
+}
+
+let result2 = sum2(3, 5)
+
+console.log(result2) // 8
+
+// -------------------------------------
+
+const multiply = function (a, b) {
+  return a * b
+}
+
+console.log(multiply(4, 2)) // 8
+
+// Funzioni Arrow
+
+const difference = (a, b) => a - b
+
+console.log(difference(10, 3)) // 7
+
+// Parametri & Return
+
+function sayHello(name) {
+  return "Hi " + name
+}
+
+let message = sayHello("Dave")
+
+console.log(message) // Ciao Dave
