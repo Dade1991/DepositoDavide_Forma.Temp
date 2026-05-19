@@ -49,7 +49,6 @@ function findLongestWord(wordsContainer) {
   // Restituiamo la parola più lunga trovata
 
   return longestWord
-  console.log("The longest word is: " + longestWord)
 }
 
 // Inizializzo funzione per il conteggio della parola più lunga
@@ -75,18 +74,17 @@ function findShortestWord(wordsContainer) {
   // Restituiamo la parola più corta trovata
 
   return shortestWord
-  console.log("The shortest word is: " + shortestWord)
 }
 
 // Inizializzo funzione che trova se una parola inizia con una vocale
 
-function findInitialVocals(wordsContainer) {
+function findInitialVowels(wordsContainer) {
   // Inizializzo una variabile che conterà quante parole iniziano con una vocale. Partirà da 0
   let counter = 0
 
   // Inizializzo array di riferimento per le vocali
 
-  let vocals = ["a", "e", "i", "o", "u"]
+  let vowels = ["a", "e", "i", "o", "u"]
 
   // Cicliamo l'array delle parole tramite indicizzazione [i] e, una volta indicizzato, isoliamo il focus sulla parte iniziale di ogni indice [0] che corrisponderà alla prima lettera
 
@@ -94,7 +92,7 @@ function findInitialVocals(wordsContainer) {
     let firstLetter = wordsContainer[i][0].toLowerCase()
 
     // Se la parola include una vocale come lettera di iniziale, incrementerà di 1 il counter
-    if (vocals.includes(firstLetter)) {
+    if (vowels.includes(firstLetter)) {
       counter++
     }
   }
@@ -102,7 +100,6 @@ function findInitialVocals(wordsContainer) {
   // Restiuiamo il conteggio
 
   return counter
-  console.log("There are " + counter + " that starts with a vocals.")
 }
 
 // Inizializzo funzione per trasformare tutte le parole in UPPERCASE
@@ -115,25 +112,8 @@ function transfromInUpperCase(wordsContainer) {
     upperCaseWords.push(wordsContainer[i].toUpperCase())
   }
 
-  return upperCaseWords
   console.log("The tranformed words are into this array: " + upperCaseWords)
+  return upperCaseWords
 }
 
 // Inizializzo funzione per avvio del programma
-
-function programStart() {
-  let words = []
-
-  let continue = true
-
-  while(continue){
-    let userInput = prompt("Please, insert a word (type 'fine' to terminate programm): ")
-
-    switch(true){
-      case userInput === null : continue = false;
-      break;
-
-      case userInput 
-    }
-  }
-}
