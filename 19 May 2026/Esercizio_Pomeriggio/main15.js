@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")()
+// const prompt = require("prompt-sync")()
 
 // Inizializzo array con objects (prodotti con chiavi-valori)
 
@@ -7,21 +7,25 @@ let products = [
     name: "pane",
     price: 2,
     quantity: 10,
+    brand: "mulino bianco",
   },
   {
     name: "latte",
     price: 1.5,
     quantity: 5,
+    brand: "granarolo",
   },
   {
     name: "pasta",
     price: 1.3,
     quantity: 0,
+    brand: "barilla",
   },
   {
     name: "biscotti",
     price: 3,
     quantity: 8,
+    brand: "mulino bianco",
   },
 ]
 
@@ -115,12 +119,26 @@ function productName(productArray) {
   for (let i = 0; i < productArray.length; i++) {
     let product = productArray[i]
 
-    if (isProductAvailable(product)) {
+    if (isProductValid(product)) {
       productNameArray.push(product.name)
     }
   }
 
   return productNameArray
+}
+
+function productBrand(productArray) {
+  let brands = []
+
+  for (let i = 0; i < productArray.length; i++) {
+    let product = productArray[i]
+
+    if (isProductValid(product)) {
+      brands.push(product.brand)
+    }
+  }
+
+  return brands
 }
 
 // ----------------------------------
@@ -142,6 +160,8 @@ if (products.length === 0) {
 
   let itemsName = productName(products)
 
+  let brandsDivision = productBrand(products)
+
   // Stampe log:
 
   console.log("Complete warehouse product's list:")
@@ -155,4 +175,7 @@ if (products.length === 0) {
 
   console.log("Just name of the product in warehouse:")
   console.log(itemsName)
+
+  console.log("Product's brand:")
+  console.log(brandsDivision)
 }
