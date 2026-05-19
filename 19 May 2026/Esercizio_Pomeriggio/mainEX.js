@@ -52,7 +52,22 @@ function findByName(nameToFind) {
   return "Invalid name, please try with another name."
 }
 
-function addNewContact(contactDetails) {}
+function addNewContact(contacts, name, phone, email) {
+  if (name === undefined || phone === undefined || email === undefined) {
+    return "Missing data."
+  }
+  let newContact = {
+    name: name,
+    phone: phone,
+    email: email,
+  }
+
+  contacts.push(newContact)
+
+  return contacts
+}
 
 showAllContacts()
 console.log(findByName("Tiz"))
+addNewContact(contacts, "Luca", 33123445763, "luchino@boh.net")
+showAllContacts()
