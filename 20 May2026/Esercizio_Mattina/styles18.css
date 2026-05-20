@@ -4,11 +4,11 @@
   flex-direction: column;
 }
 
-#inputText {
+#textInput {
   height: 50px;
 }
 
-#buttonAdd {
+#addBtn {
   margin-top: 20px;
   margin-bottom: 20px;
 }
