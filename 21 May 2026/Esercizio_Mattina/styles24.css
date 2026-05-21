@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #1b4332;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2d6a4f;
+}
+
+.desciption {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+  color: #344e41;
+}
+
+.buttonsControl {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #40916c;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2d6a4f;
+  transform: translateY(-2px);
+}
+
+#animalsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  /*
+  - repeat > ripete il medesimo schema tra parentesi, infinite volte o quante volte l'utente richiederà
+  - auto-fit > crea tante colonne quante riescono a stare nello spazio disponibile 
+  - minmax(220px, 1fr) > ogni colonna non potrà essere più piccola di 220px e puo crescere fino a 1fr, una frazione dello spazio disponibile
+  */
+  gap: 18px;
+}
+
+/* Card Settings */
+
+.animalCard {
+  background-color: #f1f8f4;
+  border: 2px solid #b7e4c7;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.animalCard h3 {
+  margin-bottom: 8px;
+  color: #1b4332;
+}
+
+.animalCard p {
+  color: #3a5a40;
+  font-size: 0.95rem;
+}
+
+.lion {
+  border-left: 6px solid #d97706;
+}
+
+.elephant {
+  border-left: 6px solid #6c757d;
+}
+
+/* Dark Theme Settings */
+
+.darkTheme {
+  background: linear-gradient(135deg, #1b4332, #081c15);
+  color: #f1faee;
+}
+
+.darkTheme .container {
+  background-color: #163126;
+}
+
+.darkTheme h1,
+.darkTheme .description {
+  color: #d8f3dc;
+}
+
+.darkTheme button {
+  background-color: #52b788;
+  color: #081c15;
+}
+
+.darkTheme button:hover {
+  background-color: #37835d;
+}
