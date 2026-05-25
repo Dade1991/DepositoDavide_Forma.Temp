@@ -3,9 +3,9 @@
 
 const STORAGE_KEY = "giocattoliNegozio"
 
-// Dichiaro una funzione che serve a recuperare i giocattoli salvati nel browser
-
 console.log(localStorage.getItem(STORAGE_KEY)) // Console.log dimostrativo su browser del contenirore (etichettato) STORAGE_KEY
+
+// Dichiaro una funzione che serve a recuperare i giocattoli salvati nel browser
 
 function getToys() {
   // Leggo da localStorage il valore associato alla chiave STORAGE_KEY
@@ -171,12 +171,18 @@ function showSummary() {
 
   const categorie = [...new Set(toys.map((toy) => toy.categoria))]
 
+  // --------------------------------------------------------------- TO BE CHECKED
+
   // Calcolo il prezzo medio
   // reduce() somma tutti i prezzi partendo da 0
   // poi divido la somma totale per il numero dei giocattoli
 
-  const prezzoMedio =
-    toys.reduce((tot, toy) => tot + toy.prezzo, 0) / totaleGiocattoli
+  // const prezzoMedio =
+  //   toys.reduce((tot, toy) => tot + toy.prezzo, 0) / totaleGiocattoli
+
+  // <p><strong>Prezzo medio:</strong> € ${prezzoMedio}</p>
+
+  // --------------------------------------------------------------- TO BE CHECKED
 
   // Creo un array con i soli nomi dei giocattoli non disponibili
   // filter() seleziona i giocattoli non disponibili
@@ -191,7 +197,7 @@ function showSummary() {
   summary.innerHTML = `
     <p><strong>Numero totale di giocattoli:</strong> ${totaleGiocattoli}</p>
     <p><strong>Categorie disponibili:</strong> ${categorie.join(", ")}</p>
-    <p><strong>Prezzo medio:</strong> € ${prezzoMedio.toFixed(2)}</p>
+
     <p><strong>Prodotti non disponibili:</strong> ${
       nonDisponibili.length
         ? nonDisponibili.join(", ")
