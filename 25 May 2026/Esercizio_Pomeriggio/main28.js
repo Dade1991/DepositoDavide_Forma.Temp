@@ -5,12 +5,15 @@ const STORAGE_KEY = "giocattoliNegozio"
 
 // Dichiaro una funzione che serve a recuperare i giocattoli salvati nel browser
 
+console.log(localStorage.getItem(STORAGE_KEY)) // Console.log dimostrativo su browser del contenirore (etichettato) STORAGE_KEY
+
 function getToys() {
   // Leggo da localStorage il valore associato alla chiave STORAGE_KEY
   // localStorage restituisce una stringa oppure null se non trova nulla
 
   const toysJSON = localStorage.getItem(STORAGE_KEY)
 
+  // Utilizzo l'operatore ternario
   // Se toysJSON esiste, lo trasformo da stringa JSON in array JavaScript con JSON.parse()
   // Se invece non esiste ancora niente, restituisco un array vuoto (controllo)
 
@@ -78,6 +81,11 @@ function showToyList() {
 
   const toyList = document.getElementById("toyList")
 
+  // Grazie a controllo eseguito tramite IA, ho aggiunto la seguente riga di codice che: verifica che toyList non sia null, ovvero vuoto. Se lo fosse, darebbe un errore
+  // Grazie al controllo ed al return, se la condizione dovesse risultare null (vuoto), blocca la funzione e, con il secondo condizionale più a basso, mostra un messaggio all'utnete
+
+  if (!toyList) return
+
   // Richiamo la funzione getToys() per recuperare l'elenco attuale dei giocattoli salvati
 
   const toys = getToys()
@@ -119,9 +127,11 @@ function showToyList() {
 
     // Infine aggiungo la card al div dell'HTML
 
-    console.log(toyCard)
-
     toyList.appendChild(toyCard)
+
+    // Ho aggiunto un console.log per vedere da browser se l'oggetto venisse visualizzato correttamente
+
+    console.log(toy)
   })
 }
 
@@ -207,12 +217,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Chiamo la funzione che inizializza l'elenco dei giocattoli salvati
-  // Funziona solo sulla pagina che contiene il div con id "toyList"
+  // Funziona solo sulla pagina che contiene il Div con id toyList
 
   showToyList()
 
   // Chiamo la funzione che visualizza il riepilogo dei dati
-  // Funziona solo sulla pagina che contiene il div con id "summary"
+  // Funziona solo sulla pagina che contiene il Div con id summary
 
   showSummary()
 })
