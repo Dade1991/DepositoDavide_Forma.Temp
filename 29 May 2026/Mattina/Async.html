@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      JavaScript Asincrono: Guida Completa (Nord Theme - Sincronizzato)
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* NORD PALETTE CHROMATIC SYSTEM */
+      :root {
+        /* Polar Night (Backgrounds/Dark elements) */
+        --nord0: #2e3440;
+        --nord1: #3b4252;
+        --nord2: #434c5e;
+        --nord3: #4c566a;
+
+        /* Snow Storm (Typography/Foregrounds) */
+        --nord4: #d8dee9;
+        --nord5: #e5e9f0;
+        --nord6: #eceff4;
+
+        /* Frost (Accents/Highlights) */
+        --nord7: #8fbcbb; /* Cyan-tinted Frost */
+        --nord8: #88c0d0; /* Bright Cyan Frost */
+        --nord9: #81a1c1; /* Light Blue Frost */
+        --nord10: #5e81ac; /* Dark Blue Frost */
+
+        /* Aurora (Status/Alerts) */
+        --nord11: #bf616a; /* Red */
+        --nord12: #d08770; /* Orange */
+        --nord13: #ebcb8b; /* Yellow */
+        --nord14: #a3be8c; /* Green */
+        --nord15: #b48ead; /* Purple */
+
+        /* Abstract semantic mappings */
+        --bg-main: var(--nord0);
+        --bg-slide: var(--nord1);
+        --border: var(--nord2);
+        --code-bg: var(--nord0);
+        --text-main: var(--nord6);
+        --text-muted: var(--nord4);
+        --accent: var(--nord8);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        font-family: "Inter", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        padding: 60px 20px;
+      }
+
+      /* HARD-BOUNDED RECTILINEAR PRESENTATION CANVAS */
+      .slide {
+        background-color: var(--bg-slide);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        width: 1100px;
+        height: 650px;
+        padding: 55px 65px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        position: relative;
+      }
+
+      /* ACUTE LEFT ACCENT BORDER FOR STRUCTURAL ENTITLEMENT */
+      h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--nord5);
+        margin-bottom: 35px;
+        border-left: 6px solid var(--nord8);
+        padding-left: 18px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        font-size: 18.5px;
+        line-height: 1.65;
+        color: var(--text-main);
+        margin-bottom: 18px;
+      }
+
+      strong {
+        color: var(--nord9);
+        font-weight: 600;
+      }
+
+      ul {
+        list-style: none;
+        margin-bottom: 25px;
+      }
+
+      li {
+        font-size: 17.5px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+        position: relative;
+        padding-left: 28px;
+      }
+
+      li::before {
+        content: "▪";
+        color: var(--nord7);
+        font-size: 18px;
+        position: absolute;
+        left: 5px;
+        top: -1px;
+      }
+
+      /* SYNTAX-HIGHLIGHTED RECTILINEAR CODE BLOCKS */
+      pre {
+        background-color: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 22px;
+        font-family: "Fira Code", monospace;
+        font-size: 14.5px;
+        line-height: 1.55;
+        color: var(--nord4);
+        overflow-x: auto;
+        margin-top: 15px;
+        flex-grow: 1;
+      }
+
+      /* NORD CHROMATIC TOKENS - CORRETTO COLORE COMMENTI DA 4C566A A EBCB8B PER ALTA LEGGIBILITÀ */
+      .kw {
+        color: #81a1c1;
+        font-weight: 500;
+      } /* Keyword - Light Blue */
+      .fn {
+        color: #88c0d0;
+      } /* Function - Bright Cyan */
+      .str {
+        color: #a3be8c;
+      } /* String - Green */
+      .num {
+        color: #b48ead;
+      } /* Numeric - Purple */
+      .cm {
+        color: #ebcb8b;
+        font-style: italic;
+        font-weight: 500;
+      } /* Comment - Aurora Yellow per massimo contrasto */
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 45px;
+        align-items: start;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SLIDE 1 -->
+    <div class="slide">
+      <h2>Il Modello di Esecuzione di JavaScript</h2>
+      <p>
+        JavaScript è un linguaggio <strong>single-threaded</strong>:
+        architettato per elaborare un'unica istruzione atomica per unità di
+        tempo sul thread principale[cite: 1].
+      </p>
+      <p>
+        L'elaborazione sequenziale è gestita interamente tramite una struttura
+        dati denominata <strong>Call Stack</strong>[cite: 1].
+      </p>
+      <ul>
+        <li>
+          Il codice nativo viene valutato in maniera rigidamente
+          <strong>sincrona</strong>[cite: 1].
+        </li>
+        <li>
+          Ogni singola istruzione agisce como operazione bloccante (blocking)
+          per le linee di codice successive[cite: 1].
+        </li>
+        <li>
+          Qualora una funzione consumi cicli computazionali estesi, l'intero
+          thread principale entra in stato di latenza isolando l'interazione
+          utente[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+      <h2>Il Call Stack e la Logica LIFO</h2>
+      <p>
+        Il Call Stack opera seguendo lo schema logico
+        <strong>LIFO (Last In, First Out)</strong>: l'ultimo contesto inserito
+        nello stack di runtime rappresenta il primo a essere completato ed
+        espulso[cite: 1].
+      </p>
+      <p>
+        <strong
+          >Analisi deterministica del flusso d'esecuzione impilato:</strong
+        >
+      </p>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li>
+              1. Invocazione iniziale della routine superiore:
+              <code>terza()</code>[cite: 1].
+            </li>
+            <li>
+              2. La routine <code>terza()</code> esegue l'allocazione interna di
+              <code>seconda()</code>[cite: 1].
+            </li>
+            <li>
+              3. La routine <code>seconda()</code> esegue l'allocazione interna
+              di <code>prima()</code>[cite: 1].
+            </li>
+            <li>
+              4. Lo Stack accumula i record di attivazione verticalmente[cite:
+              1].
+            </li>
+            <li>
+              5. Terminata <code>prima()</code>, il record viene rimosso,
+              sbloccando la catena a ritroso[cite: 1].
+            </li>
+          </ul>
+        </div>
+        <pre>
+<span class="kw">function</span> <span class="fn">prima</span>() { console.<span class="fn">log</span>(<span class="str">"Uno"</span>); }
+<span class="kw">function</span> <span class="fn">seconda</span>() { <span class="fn">prima</span>(); }
+<span class="kw">function</span> <span class="fn">terza</span>() { <span class="fn">seconda</span>(); }
+
+<span class="fn">terza</span>(); <span class="cm">// Avvio della catena LIFO</span></pre>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+      <h2>Il Main Script e i Limiti del Codice Sincrono</h2>
+      <p>
+        Durante la fase di caricamento di un file sorgente, l'ambiente alloca
+        nel Call Stack il contesto globale principale definito
+        <strong>Main Script</strong>[cite: 1].
+      </p>
+      <p>
+        Il codice sincrono viene valutato sequenzialmente dall'alto verso il
+        basso all'interno di questo blocco di runtime primario[cite: 1].
+      </p>
+      <ul>
+        <li>
+          Algoritmi di computazione intensiva occupano staticamente il Call
+          Stack impedendo altre valutazioni[cite: 1].
+        </li>
+        <li>
+          Finché lo stack globale rimane occupato da una computazione sincrona,
+          nessun gestore di eventi può essere processato[cite: 1].
+        </li>
+        <li>
+          L'asincronia è necessaria per spostare l'attesa di risposte esterne al
+          di fuori del flusso sequenziale del thread[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+      <h2>Le Operazioni Temporali e di I/O (Input/Output)</h2>
+      <p>
+        Le architetture software moderne sono strettamente interconnesse con
+        flussi asincroni riconducibili a due ambiti[cite: 1]:
+      </p>
+      <ul>
+        <li>
+          <strong>Operazioni Temporali:</strong> Routines deferite nel tempo che
+          richiedono precisione di esecuzione o ciclicità (es. pianificazione
+          interna, scadenze strutturate)[cite: 1].
+        </li>
+        <li>
+          <strong>Operazioni di I/O (Input/Output):</strong> Trasferimenti
+          flussi dati tra il core dell'applicazione e canali hardware
+          esterni[cite: 1]:
+          <ul>
+            <li>
+              <strong>Network:</strong> Richieste asincrone tramite HTTP
+              (<code>fetch</code>), pipeline di connessione ed interrogazione
+              database relazionali e non relazionali (MongoDB)[cite: 1].
+            </li>
+            <li>
+              <strong>File System:</strong> Operazioni sistemistiche di lettura
+              e scrittura binaria/testuale su unità disco locali[cite: 1].
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+        Questi processi non impegnano direttamente la CPU del runtime. JS ne
+        delega la gestione fisica per evitarne il blocco stringente[cite: 1].
+      </p>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+      <h2>Introduzione alle Callback</h2>
+      <p>
+        Una <strong>callback</strong> si definisce formalmente come una funzione
+        regolare iniettata come parametro all'interno della firma di un'altra
+        funzione[cite: 1].
+      </p>
+      <p>
+        Rappresenta il pattern fondamentale originario dell'ecosistema
+        JavaScript per l'intercettazione degli eventi[cite: 1].
+      </p>
+      <ul>
+        <li>
+          La routine ricevente accetta il puntatore della callback ma
+          <strong>non provvede alla sua esecuzione immediata</strong>[cite: 1].
+        </li>
+        <li>
+          Il runtime si occupa di registrare il riferimento logico all'interno
+          delle strutture di monitoraggio[cite: 1].
+        </li>
+        <li>
+          L'invocazione reale avviene esclusivamente al soddisfacimento di una
+          determinata condizione di sblocco asincrona (es. completamento di un
+          timer)[cite: 1].
+        </li>
+        <li>
+          Tale disaccoppiamento permette al Call Stack di procedere oltre senza
+          tempi morti o congelamenti del thread[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+      <h2>Il Problema del Valore Futuro senza Callback</h2>
+      <p>
+        Se proviamo a estrarre un dato asincrono usando il costrutto sincrono
+        <code>return</code> all'interno di un timer, l'operazione fallisce
+        restituendo <code>undefined</code>[cite: 1].
+      </p>
+      <p>
+        Questo accade perché la funzione principale termina immediatamente,
+        molto prima che il timer sia scaduto[cite: 1].
+      </p>
+      <pre>
+<span class="kw">function</span> <span class="fn">richiediUtenteErrato</span>(id) {
+    console.<span class="fn">log</span>(<span class="str">"1. Avvio ricerca nel database..."</span>);
+
+    <span class="fn">setTimeout</span>(() => {
+        <span class="kw">const</span> utente = { id: id, nome: <span class="str">"Simone"</span> };
+        <span class="kw">return</span> utente; <span class="cm">// ERRORE: This return fails, the data is lost!</span>
+    }, <span class="num">2000</span>);
+}
+
+<span class="kw">const</span> risultato = <span class="fn">richiediUtenteErrato</span>(<span class="num">101</span>);
+console.<span class="fn">log</span>(<span class="str">"2. Esito:"</span>, risultato); <span class="cm">// Prints immediately 'undefined'</span></pre>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+      <h2>Esempio Reale: Portare fuori il dato con una Callback</h2>
+      <p>
+        Per recuperare il valore asincrono, dobbiamo passare una funzione
+        (callback) che agisca da ricevitore. Sarà il timer a eseguirla
+        iniettando il dato quando pronto[cite: 1].
+      </p>
+      <pre>
+<span class="cm">// 'mostraDati' è il parametro logico che riceverà la funzione futura</span>
+<span class="kw">function</span> <span class="fn">richiediUtenteDalDB</span>(id, mostraDati) {
+    console.<span class="fn">log</span>(<span class="str">"1. Avvio ricerca nel database..."</span>);
+
+    <span class="fn">setTimeout</span>(() => {
+        <span class="kw">const</span> utente = { id: id, nome: <span class="str">"Simone"</span> }; <span class="cm">// Il dato è pronto dopo 2s</span>
+        <span class="fn">mostraDati</span>(utente); <span class="cm">// Invocazione esplicita della callback con il payload</span>
+    }, <span class="num">2000</span>);
+}
+
+<span class="cm">// Invocazione: passiamo l'ID e la routine che gestirà il valore futuro</span>
+<span class="fn">richiediUtenteDalDB</span>(<span class="num">101</span>, (risultato) => {
+    console.<span class="fn">log</span>(<span class="str">"3. Dato ricevuto! Nome utente:"</span>, risultato.nome);
+});
+
+console.<span class="fn">log</span>(<span class="str">"2. Il thread principale continua le esecuzioni..."</span>);</pre>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+      <h2>Le API del Runtime (Web APIs e Node.js APIs)</h2>
+      <p>
+        Il core engine di JavaScript non dispone nativamente di logiche
+        temporali o interfacce di rete. Tali astrazioni sono fornite dai layer
+        dell'ambiente ospitante mediante le <strong>Runtime APIs</strong>[cite:
+        1].
+      </p>
+      <ul>
+        <li>
+          <strong>Timer API:</strong> Funzioni native
+          <code>setTimeout()</code> e <code>setInterval()</code>. La misurazione
+          temporale viene scaricata direttamente sull'orologio del kernel di
+          sistema[cite: 1].
+        </li>
+        <li>
+          <strong>Network API:</strong> Interfacce di connessione (es. driver
+          nativo MongoDB, modulo HTTP). L'astrazione e il monitoraggio dei
+          pacchetti TCP/IP ricadono sui thread di rete[cite: 1].
+        </li>
+        <li>
+          <strong>I/O API:</strong> Moduli integrati (es. <code>fs</code> in
+          Node.js). La gestione dei descrittori di file e blocchi fisici è
+          interamente a carico del File System operante[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide">
+      <h2>L'Event Loop e la Gestione delle Code</h2>
+      <p>
+        L'<strong>Event Loop</strong> rappresenta il motore ciclico asincrono
+        deputato alla sincronizzazione del Call Stack con le code di attesa. Il
+        ciclo opera secondo ferree priorità deterministiche[cite: 1]:
+      </p>
+      <ul>
+        <li>
+          <strong>Verifica Stack:</strong> Controlla se il Call Stack è vuoto.
+          Qualora vi sia codice sincrono o script globale, ne attende la
+          risoluzione[cite: 1].
+        </li>
+        <li>
+          <strong>Microtask Queue (Priorità Massima):</strong> Svuota
+          interamente la coda associata ai microtask (all'interno della quale
+          risiedono esclusivamente i gestori delle <strong>Promise</strong>)
+          prima di computare altre strutture[cite: 1].
+        </li>
+        <li>
+          <strong>Macrotask Queue (Priorità Standard):</strong> Solo ad
+          azzeramento dei microtask, l'Event Loop estrae **un singolo elemento**
+          dalla coda dei macrotask (timer, eventi I/O completati) e lo
+          ridireziona nel Call Stack per la sua esecuzione finale[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide">
+      <h2>Il Limite Strutturale delle Callback: Callback Hell</h2>
+      <p>
+        Qualora una sequence logica richieda concatenazioni asincrone dipendenti
+        in serie, l'architettura a callback obbliga a una nidificazione
+        sintattica nidificata[cite: 1].
+      </p>
+      <div class="grid-2">
+        <div>
+          <p>
+            Questa degenerazione strutturale viene definita
+            <strong>Callback Hell</strong>[cite: 1]:
+          </p>
+          <ul>
+            <li>
+              Il codice sorgente subisce una crescita orizzontale geometrica a
+              imbuto[cite: 1].
+            </li>
+            <li>
+              Saturazione immediata della leggibilità e manutenibilità[cite: 1].
+            </li>
+            <li>
+              La gestione degli errori è isolata a ogni singolo livello: la
+              propagazione delle eccezioni è inesistente e rende i flussi non
+              controllabili e complessi da tracciare[cite: 1].
+            </li>
+          </ul>
+        </div>
+        <pre>
+<span class="fn">prendiUtente</span>(<span class="num">1</span>, (utente) => {
+    <span class="fn">prendiOrdini</span>(utente.id, (ordini) => {
+        <span class="fn">prendiSpedizione</span>(ordini[<span class="num">0</span>].id, (spedizione) => {
+            console.<span class="fn">log</span>(spedizione.stato);
+            <span class="cm">// Struttura complessa e rigida</span>
+        });
+    });
+});</pre>
+      </div>
+    </div>
+
+    <!-- SLIDE 11 -->
+    <div class="slide">
+      <h2>Le Promise: Definizione e Stati</h2>
+      <p>
+        Introdotte dallo standard ECMAScript 6, le <strong>Promise</strong> sono
+        oggetti proxy che incapsulano lo stato futuro di un'operazione asincrona
+        deferita, fornendo un modello lineare alternativo alle callback[cite:
+        1].
+      </p>
+      <p>
+        Una Promise attraversa un ciclo di vita regolato da tre stati
+        determinati[cite: 1]:
+      </p>
+      <ul>
+        <li>
+          <strong>Pending (In attesa):</strong> Configurazione iniziale di
+          avvio. L'attività asincrona associata è in elaborazione in background;
+          il valore finale non è ancora disponibile[cite: 1].
+        </li>
+        <li>
+          <strong>Fulfilled (Risolta):</strong> L'operazione asincrona è
+          terminata con successo. La promessa immagazzina internamente il
+          payload immutabile restituito dalla routine tramite
+          <code>resolve()</code>[cite: 1].
+        </li>
+        <li>
+          <strong>Rejected (Rifiutata):</strong> L'operazione è fallita.
+          L'oggetto memorizza il motivo del blocco o l'istanza nativa di
+          <code>Error</code> passata alla routine tramite
+          <code>reject()</code>[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 12 -->
+    <div class="slide">
+      <h2>Sintassi di Creazione di una Promise</h2>
+      <p>
+        L'inizializzazione di una promessa avviene richiamando l'operatore di
+        istanza <code>new Promise()</code>, che accetta come parametro una
+        funzione esecutrice provvista dei delegati <code>resolve</code> e
+        <code>reject</code>[cite: 1]:
+      </p>
+      <pre>
+<span class="kw">function</span> <span class="fn">caricaDatiConfig</span>() {
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Promise</span>((resolve, reject) => {
+        <span class="kw">const</span> operazioneStabile = <span class="kw">true</span>;
+        
+        <span class="fn">setTimeout</span>(() => {
+            <span class="kw">if</span> (operazioneStabile) {
+                <span class="cm">// Forza la transizione immediata allo stato Fulfilled</span>
+                <span class="fn">resolve</span>({ porta: <span class="num">8080</span>, db: <span class="str">"mongo"</span> });
+            } <span class="kw">else</span> {
+                <span class="cm">// Forza la transizione immediata allo stato Rejected</span>
+                <span class="fn">reject</span>(<span class="kw">new</span> <span class="fn">Error</span>(<span class="str">"Impossibile accedere allo storage"</span>));
+            }
+        }, <span class="num">1500</span>);
+    });
+}</pre>
+    </div>
+
+    <!-- SLIDE 13 -->
+    <div class="slide">
+      <h2>Consumare una Promise: then, catch e finally</h2>
+      <p>
+        L'estrazione sequenziale dei dati o la cattura dei guasti interni di un
+        oggetto Promise viene delegata a tre specifici metodi architetturali
+        d'istanza[cite: 1]:
+      </p>
+      <ul>
+        <li>
+          <strong><code>.then(callback)</code>:</strong> Sottoscrive la funzione
+          che verrà eseguita solo se la promessa transita nello stato di
+          <strong>Fulfilled</strong>. Riceve in ingresso il parametro inviato
+          tramite <code>resolve()</code>[cite: 1].
+        </li>
+        <li>
+          <strong><code>.catch(callback)</code>:</strong> Sottoscrive la
+          funzione intercettatrice attivata se la promessa si sposta nello stato
+          di <strong>Rejected</strong>. Isola l'errore centralizzando la logica
+          di fallback del codice[cite: 1].
+        </li>
+        <li>
+          <strong><code>.finally(callback)</code>:</strong> Assicura
+          l'esecuzione della routine a chiusura definitiva del ciclo di vita
+          della promessa, senza condizionamenti legati all'esito[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 14 -->
+    <div class="slide">
+      <h2>La Sintassi del Chaining (Concatenamento delle Promise)</h2>
+      <p>
+        Ciascun metodo <code>.then()</code> restituisce per specifica a sua
+        volta un nuovo oggetto Promise. Questa caratteristica permette lo
+        sviluppo verticale del codice, eliminando la nidificazione delle vecchie
+        callback[cite: 1]:
+      </p>
+      <pre>
+<span class="fn">caricaDatiConfig</span>()
+    .<span class="fn">then</span>((config) => {
+        console.<span class="fn">log</span>(<span class="str">"Porta configurata:"</span>, config.porta);
+        <span class="kw">return</span> <span class="fn">connettiAlDatabase</span>(config.db); <span class="cm">// Restituisce una nuova Promise</span>
+    })
+    .<span class="fn">then</span>((connessione) => {
+        console.<span class="fn">log</span>(<span class="str">"Stato Connessione DB:"</span>, connessione.stato);
+    })
+    .<span class="fn">catch</span>((errore) => {
+        <span class="cm">// Unico punto di cattura per le eccezioni scatenate nella catena precedente</span>
+        console.<span class="fn">log</span>(<span class="str">"Eccezione rilevata nel flusso:"</span>, errore.message);
+    });</pre>
+    </div>
+
+    <!-- SLIDE 15 -->
+    <div class="slide">
+      <h2>Async / Await: Definizione e Regole Sintattiche</h2>
+      <p>
+        La combinazione di parole chiave
+        <strong>Async / Await</strong> (standard ES2017) introduce un'astrazione
+        sintattica nativa sopra il sistema a Promise. Non altera i meccanismi
+        asincroni sottostanti, ma ottimizza la formattazione del codice
+        sorgente[cite: 1].
+      </p>
+      <p>
+        L'utilizzo impone vincoli strutturali e sintattici immediati[cite: 1]:
+      </p>
+      <ul>
+        <li>
+          <strong>Marcatore <code>async</code>:</strong> Deve essere inserito
+          esplicitamente prima della dichiarazione del blocco funzionale.
+          Modifica l'output della funzione costringendola a restituire
+          <strong>sempre una Promise</strong>[cite: 1].
+        </li>
+        <li>
+          <strong>Operatore <code>await</code>:</strong> Utilizzabile
+          esclusivamente in ambiti racchiusi in un blocco preventivamente
+          marcato come <code>async</code>. Viene preposto davanti a espressioni
+          che valutano o restituiscono promesse[cite: 1].
+        </li>
+        <li>
+          <strong>Meccanica interna:</strong> L'operatore
+          <code>await</code> congela l'esecuzione sequenziale interna della
+          funzione fino alla risoluzione della Promise associata. Il thread
+          principale non viene congelato e può elaborare altre code di eventi
+          concorrenti[cite: 1].
+        </li>
+      </ul>
+    </div>
+
+    <!-- NUOVA SLIDE 16: LA MECCANICA DI AWAIT -->
+    <div class="slide">
+      <h2>La Meccanica Interna di Await</h2>
+      <p>
+        L'operatore <strong><code>await</code></strong> agisce come un punto di
+        sincronizzazione sintattico, modificando profondamente il flusso interno
+        della routine asincrona.
+      </p>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li>
+              <strong>Unwrapping del Payload:</strong> Sostituisce l'estrazione
+              manuale tramite <code>.then()</code>. Intercetta la Promise e ne
+              estrae direttamente il valore risolto inserendolo nella variabile.
+            </li>
+            <li>
+              <strong>Sospensione Non Bloccante:</strong> Congela unicamente
+              l'esecuzione della funzione corrente. Il Call Stack si libera
+              immediatamente, permettendo all'Event Loop di elaborare altre
+              micro/macrotask concorrenti.
+            </li>
+            <li>
+              <strong>Conversione dei Rifiuti:</strong> Se la Promise viene
+              rifiutata, <code>await</code> solleva un'eccezione nativa,
+              attivando immediatamente il blocco <code>catch</code> associato.
+            </li>
+          </ul>
+        </div>
+        <pre>
+<span class="kw">async</span> <span class="kw">function</span> <span class="fn">ottieniDati</span>() {
+    console.<span class="fn">log</span>(<span class="str">"1. Avvio"</span>);
+    
+    <span class="cm">// La funzione si ferma qui per il tempo necessario.</span>
+    <span class="cm">// Il thread principale resta totalmente reattivo!</span>
+    <span class="kw">const</span> risultato = <span class="kw">await</span> <span class="fn">fetchDalServer</span>(); 
+    
+    console.<span class="fn">log</span>(<span class="str">"2. Completato con successo"</span>);
+    <span class="kw">return</span> risultato;
+}</pre>
+      </div>
+    </div>
+
+    <!-- SLIDE 17 (EX SLIDE 16) -->
+    <div class="slide">
+      <h2>Esempio Pratico e Gestione degli Errori con try...catch</h2>
+      <p>
+        L'adozione della sintassi lineare con <code>await</code> esclude l'uso
+        diretto delle catene di metodi prototipali. Di conseguenza, il
+        monitoraggio delle eccezioni asincrone viene ricondotto all'uso dei
+        blocchi strutturati nativi <strong><code>try...catch</code></strong
+        >[cite: 1].
+      </p>
+      <pre>
+<span class="kw">async</span> <span class="kw">function</span> <span class="fn">avviaApplicazione</span>() {
+    <span class="kw">try</span> {
+        <span class="cm">// La computazione locale attende in modo lineare il completamento di caricaDatiConfig()</span>
+        <span class="kw">const</span> config = <span class="kw">await</span> <span class="fn">caricaDatiConfig</span>();
+        console.<span class="fn">log</span>(<span class="str">"Configurazione caricata"</span>);
+        
+        <span class="kw">const</span> connessione = <span class="kw">await</span> <span class="fn">connettiAlDatabase</span>(config.db);
+        console.<span class="fn">log</span>(<span class="str">"Database sincronizzato"</span>);
+    } <span class="kw">catch</span> (errore) {
+        <span class="cm">// Cattura centralizzata dei reject generati dalle funzioni anticipate da await</span>
+        console.<span class="fn">error</span>(<span class="str">"Blocco critico intercettato:"</span>, errore.message);
+    }
+}</pre>
+    </div>
+
+    <!-- SLIDE 18 (EX SLIDE 17) -->
+    <div class="slide">
+      <h2>Comparazione Diretta: Catena di Promise vs Async/Await</h2>
+      <p>
+        Rappresentazione parallela della medesima logica asincrona strutturata
+        secondo i due differenti approcci standard dell'industria[cite: 1]:
+      </p>
+      <div class="grid-2">
+        <div>
+          <p><strong>Sintassi a Promise (Chaining):</strong></p>
+          <pre style="font-size: 13.3px">
+<span class="kw">function</span> <span class="fn">gestisciProfilo</span>() {
+    <span class="fn">ottieniUtente</span>()
+        .<span class="fn">then</span>(user => <span class="fn">ottieniPost</span>(user.id))
+        .<span class="fn">then</span>(posts => console.<span class="fn">log</span>(posts))
+        .<span class="fn">catch</span>(err => console.<span class="fn">log</span>(err));
+}</pre>
+        </div>
+        <div>
+          <p><strong>Sintassi Lineare (Async / Await):</strong></p>
+          <pre style="font-size: 13.3px">
+<span class="kw">async</span> <span class="kw">function</span> <span class="fn">gestisciProfilo</span>() {
+    <span class="kw">try</span> {
+        <span class="kw">const</span> user = <span class="kw">await</span> <span class="fn">ottieniUtente</span>();
+        <span class="kw">const</span> posts = <span class="kw">await</span> <span class="fn">ottieniPost</span>(user.id);
+        console.<span class="fn">log</span>(posts);
+    } <span class="kw">catch</span> (err) {
+        console.<span class="fn">log</span>(err);
+    }
+}</pre>
+        </div>
+      </div>
+      <p style="margin-top: 20px">
+        L'implementazione basata su Async/Await azzera le annidazioni
+        strutturali residue e garantisce la stesura di un codice lineare[cite:
+        1]. Questo approccio costituirà lo standard obbligatorio per
+        l'integrazione di server sviluppati con <strong>Express.js</strong> e
+        storage gestiti tramite <strong>MongoDB</strong>[cite: 1].
+      </p>
+    </div>
+  </body>
+  <script src="main.js"></script>
+</html>
