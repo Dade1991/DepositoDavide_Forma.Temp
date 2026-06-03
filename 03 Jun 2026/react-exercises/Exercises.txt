@@ -1,0 +1,90 @@
+Esercitazione Pratica React: La Vetrina del Team Dinamica
+Obiettivo dell'esercizio
+Creare una pagina web completa che mostri i membri del team di un'azienda. L'obiettivo è imparare a scomporre un'interfaccia in componenti React singoli e riutilizzabili, passare dati dinamici tramite le Props e utilizzare i booleani per cambiare l'aspetto visivo del CSS, ripassando al contempo HTML semantico e layout responsive.
+
+Requisiti Tecnici
+Utilizzare React con JSX.
+
+Dividere la pagina in componenti separati e importarli correttamente.
+
+Passare le informazioni tramite le Props (comprese stringhe e booleani).
+
+Utilizzare un booleano nelle props per applicare classi CSS condizionali.
+
+Nota bene: Non è richiesto l'uso di cicli (.map()) o stati (useState). Potete duplicare manualmente i componenti nel JSX passando dati differenti.
+
+Struttura della Pagina e Componenti
+L'applicazione sarà composta da un componente principale (App.jsx) che fa da contenitore, e da tre componenti figli:
+
+1. Il Componente Header
+Crea la barra superiore della pagina. Deve contenere:
+
+Il logo dell'azienda (testo o immagine).
+
+Un menu di navigazione fittizio (es. "Home", "Team", "Contatti").
+
+CSS: Usa Flexbox per distanziare il logo dal menu e applica un colore di sfondo.
+
+2. Il Componente Footer
+Crea il piè di pagina. Deve contenere:
+
+I dati sul copyright (es. "© 2026 NomeAzienda").
+
+CSS: Allinea il testo al centro e dai un distacco visivo dal resto della pagina.
+
+3. Il Componente TeamCard (Il cuore dell'esercizio)
+Questo componente rappresenta la scheda di un singolo membro del team. Deve ricevere tutto dall'esterno tramite le props:
+
+name (stringa)
+
+role (stringa)
+
+bio (stringa)
+
+imageUrl (stringa)
+
+isPresent (booleano: true o false)
+
+La logica del Bottone e dello Stile Condizionale:
+Dentro il componente TeamCard, inserisci un tag <button>.
+
+Se isPresent è true, il bottone deve mostrare il testo "Disponibile" e la card deve avere uno stile normale (es. un bordo verde o un badge luminoso).
+
+Se isPresent è false, il bottone deve mostrare il testo "Assente / In Riunione" e la card deve cambiare stile (es. l'immagine diventa in bianco e nero, lo sfondo diventa grigio o l'opacità si abbassa).
+
+Suggerimento: Usa l'operatore ternario nel JSX per cambiare la classe CSS o il testo del bottone in base alla prop isPresent.
+
+Traccia del Lavoro (Passo dopo Passo)
+Fase 1: Struttura dei Componenti
+Crea i file Header.jsx, Footer.jsx e TeamCard.jsx.
+
+Scrivi la struttura HTML interna di ognuno sfruttando i tag semantici (<header>, <footer>, <article>).
+
+Fase 2: Configurazione delle Props e Logica Visiva
+Nel file TeamCard.jsx, accetta le props passate come argomento della funzione.
+
+Usa la prop isPresent per pilotare la classe CSS del contenitore della scheda. Ad esempio: className={props.isPresent ? "card online" : "card offline"}.
+
+Fai la stessa cosa per il testo del bottone.
+
+Fase 3: Assemblaggio in App.jsx
+Importa tutti i componenti in App.jsx.
+
+Nel corpo della pagina, richiama il componente TeamCard per almeno 3 volte.
+
+Passa a ciascuna scheda dati diversi. Assicurati di impostare isPresent={true} per alcuni membri e isPresent={false} per altri, così da vedere la differenza visiva nel browser.
+
+Fase 4: Stile CSS e Responsiveness
+Usa Flexbox o CSS Grid nel componente principale per fare in modo che le schede si dispongano su più colonne su desktop e vadano in verticale su mobile.
+
+Nel CSS, definisci chiaramente le differenze visive tra la classe del membro "presente" e di quello "assente" (es. usando i filtri CSS come filter: grayscale(100%) per chi è assente).
+
+Struttura dei File Richiesta
+Plaintext
+src/
+├── main.jsx          <-- Entry point
+├── App.jsx           <-- Contenitore generale (unisce Header, le varie TeamCard e Footer)
+├── App.css           <-- Il file CSS con tutti gli stili e le classi condizionali
+├── Header.jsx        <-- Componente Header
+├── Footer.jsx        <-- Componente Footer
+└── TeamCard.jsx      <-- Componente Scheda (con logica props.isPresent)
