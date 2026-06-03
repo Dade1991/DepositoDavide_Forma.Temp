@@ -7,6 +7,8 @@ import Giacomino from "./assets/Giacomino.jpg"
 import Giovanni from "./assets/Giovanni.jpg"
 import Aldo from "./assets/Aldo.jpg"
 
+import { LightSwitch } from "./components/LightSwtich"
+
 function App() {
   const teamCardUserData = [
     {
@@ -50,6 +52,7 @@ function App() {
             isPresent={userCard.isPresent}
           />
         ))}
+        <LightSwitch />
         <CustomFooter />
       </section>
     </>
