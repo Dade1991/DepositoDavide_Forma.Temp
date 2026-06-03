@@ -1,0 +1,49 @@
+.teamCard {
+  width: 300px;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 12px;
+  background-color: #37c9a4;
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  color: #1f1f1f;
+}
+
+.teamCardBody {
+  margin: 12px 0;
+}
+
+.teamCardInput {
+  font-weight: bold;
+}
+
+.imgWrapper {
+  margin: 20px 0px;
+  border-radius: 12px;
+}
+
+.imgWrapper img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.329);
+}
+
+.statusButton {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.availableButton {
+  background-color: green;
+}
+
+.notAvailableButton {
+  background-color: red;
+}
