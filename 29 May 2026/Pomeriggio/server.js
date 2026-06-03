@@ -112,3 +112,21 @@ app.listen(PORT, () => {
 
   console.log(`Server has started on http://localhost:${PORT}`)
 })
+
+// PER LANCIARE CHIAMATE API DA TERMINALE
+
+// ========== (GET) ==========
+
+// curl http://localhost:5000/api/videogames
+
+// ========== (GET - include anche gli headers `-i`) ==========
+
+// curl -i http://localhost:5000/api/videogames
+
+// ========== (POST - include anche gli headers `-i`) ==========
+
+// curl -i -X POST http://localhost:5000/api/videogames -H "Content-Type: application/json" -d '{"title": "Elden Ring", "platform": "PC"}'
+
+// alternativa
+
+// curl -i --json '{"title": "Pokemon Emerald Version", "platform": "PS4"}' http://localhost:5000/api/videogames

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sviluppo Backend: Laboratorio ed Esercizi Pratici</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --nord0: #2e3440;
+        --nord1: #3b4252;
+        --nord2: #434c5e;
+        --nord3: #4c566a;
+        --nord4: #d8dee9;
+        --nord5: #e5e9f0;
+        --nord6: #eceff4;
+        --nord7: #8fbcbb;
+        --nord8: #88c0d0;
+        --nord9: #81a1c1;
+        --nord10: #5e81ac;
+        --nord11: #bf616a;
+        --nord12: #d08770;
+        --nord13: #ebcb8b;
+        --nord14: #a3be8c;
+        --bg-main: var(--nord0);
+        --bg-slide: var(--nord1);
+        --border: var(--nord2);
+        --code-bg: var(--nord0);
+        --text-main: var(--nord6);
+        --text-muted: var(--nord4);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        font-family: "Inter", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        padding: 60px 20px;
+      }
+      .slide {
+        background-color: var(--bg-slide);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        width: 1100px;
+        height: 650px;
+        padding: 55px 65px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        position: relative;
+      }
+      h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--nord5);
+        margin-bottom: 35px;
+        border-left: 6px solid var(--nord12);
+        padding-left: 18px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+      p {
+        font-size: 18.5px;
+        line-height: 1.65;
+        color: var(--text-main);
+        margin-bottom: 18px;
+      }
+      strong {
+        color: var(--nord12);
+        font-weight: 600;
+      }
+      ul {
+        list-style: none;
+        margin-bottom: 25px;
+      }
+      li {
+        font-size: 17.5px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+        position: relative;
+        padding-left: 28px;
+      }
+      li::before {
+        content: "▪";
+        color: var(--nord12);
+        font-size: 18px;
+        position: absolute;
+        left: 5px;
+        top: -1px;
+      }
+      .badge {
+        position: absolute;
+        top: 55px;
+        right: 65px;
+        background-color: var(--nord3);
+        color: var(--nord5);
+        padding: 6px 14px;
+        font-family: "Fira Code", monospace;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--nord2);
+      }
+      .dl-bar {
+        background-color: var(--nord2);
+        width: 1100px;
+        padding: 15px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: -20px;
+      }
+      .dl-btn {
+        background-color: var(--nord12);
+        color: var(--nord6);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide">
+      <div class="badge">Esercizio 1 (Difficoltà: Bassa)</div>
+      <h2>Il Convertitore di Stringhe Asincrono</h2>
+      <p>
+        <strong>Obiettivo didattico:</strong> Assimilare i meccanismi di
+        scomposizione temporale e astrazione sintattica mediante l'uso
+        sequenziale di Callback, Promise e costrutti Async/Await.
+      </p>
+      <p><strong>Specifiche di implementazione richieste:</strong></p>
+      <ul>
+        <li>
+          1. Sviluppare una routine denominata
+          <code>invertiStringaAsincrona(testo, callback)</code>. L'applicazione
+          deve impostare un timer asincrono (<code>setTimeout</code>) con un
+          delay di 1500ms in background. Al completamento, deve convertire la
+          stringa in caratteri maiuscoli ed iniettarla come argomento della
+          callback. Verificare l'esecuzione in console.
+        </li>
+        <li>
+          2. Effettuare il refactoring della funzione: rimuovere il parametro
+          callback e forzare la funzione a
+          <strong>restituire un'istanza di Promise</strong>. Qualora il
+          parametro <code>testo</code> risulti essere una stringa vuota, la
+          promessa deve invocare immediatamente il
+          <code>reject()</code> distribuendo una stringa descrittiva di errore.
+        </li>
+        <li>
+          3. Consumare la Promise generata implementando dapprima la sintassi a
+          catena con i metodi nativi <code>.then()</code> e
+          <code>.catch()</code>.
+        </li>
+        <li>
+          4. Creare un blocco funzionale separato marcato come
+          <code>async</code> ed eseguire l'estrazione lineare del medesimo
+          valore tramite l'operatore <code>await</code> racchiuso dentro un
+          blocco di controllo <code>try...catch</code>.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <div class="badge">Esercizio 2 (Difficoltà: Media)</div>
+      <h2>Le API REST del Negozio di Videogiochi</h2>
+      <p>
+        <strong>Obiettivo didattico:</strong> Configurazione sistematica di
+        un'architettura server Express.js, gestione formale degli endpoint di
+        instradamento e serializzazione di payload in formato JSON.
+      </p>
+      <p><strong>Specifiche di implementazione richieste:</strong></p>
+      <ul>
+        <li>
+          1. Inizializzare un ambiente Node.js coerente mediante il comando
+          <code>npm init -y</code> ed installare la dipendenza di Express.js.
+          Strutturare il punto di ingresso configurando il server in ascolto
+          sulla porta di rete <code>5000</code>.
+        </li>
+        <li>
+          2. Dichiarare a livello di codice un array globale immutabile
+          denominato <code>videogiochi</code> contenente oggetti semistrutturati
+          hardcoded (ciascuno provvisto dei campi: <code>id</code> numerico,
+          <code>titolo</code> stringa e <code>piattaforma</code> stringa).
+        </li>
+        <li>
+          3. Implementare l'endpoint con metodo <code>GET /api/giochi</code>. La
+          funzione deve restituire lo status HTTP 200 unito all'intero array
+          serializzato in formato JSON.
+        </li>
+        <li>
+          4. Implementare l'endpoint dinamico con metodo
+          <code>GET /api/giochi/:id</code>. La callback deve estrarre il
+          parametro dall'URL (<code>req.params.id</code>), effettuare una
+          scansione filtrata dell'array tramite il metodo nativo
+          <code>.find()</code> e restituire il singolo oggetto individuato.
+          Qualora l'ID non corrisponda a nessun elemento, forzare l'invio dello
+          status HTTP <code>404</code> accoppiato a un payload JSON strutturato:
+          <code>{ errore: "Risorsa non individuata nel sistema" }</code>.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <div class="badge">Esercizio 3 (Difficoltà: Avanzata)</div>
+      <h2>La Lista dei Desideri su Database Relazionale / NoSQL</h2>
+      <p>
+        <strong>Obiettivo didattico:</strong> Consolidamento dell'architettura
+        Full-Stack backend. Integrazione dei meccanismi di persistenza dei dati
+        mediante Mongoose ODM, mapping di schemi e interazione asincrona
+        end-to-end.
+      </p>
+      <p><strong>Specifiche di implementazione richieste:</strong></p>
+      <ul>
+        <li>
+          1. Integrare all'interno del progetto del server Express la libreria
+          ODM <code>mongoose</code>. Configurare e stabilire la connessione
+          asincrona verso un'istanza locale o cloud di MongoDB associata a un
+          database denominato <code>wishlist_db</code>.
+        </li>
+        <li>
+          2. Formalizzare lo schema Mongoose denominato
+          <code>ArticoloSchema</code> per la mappatura di una lista desideri
+          oggetti. Vincolare i campi del documento secondo i seguenti criteri
+          formali: <code>nomeOggetto</code> (String, obbligatorio),
+          <code>prezzo</code> (Number, obbligatorio) e
+          <code>comprato</code> (Boolean, opzionale con valore inizializzato di
+          default a <code>false</code>). Generare il relativo modello operativo
+          <code>Articolo</code>.
+        </li>
+        <li>
+          3. Sostituire le strutture dati volatili in memoria: aggiornare
+          l'endpoint <code>GET /api/articoli</code> in modo che esegua una query
+          asincrona di estrazione sul database tramite il metodo
+          <code>await Articolo.find()</code>. Isolare le istruzioni all'interno
+          di logiche <code>try...catch</code> per intercettare guasti hardware.
+        </li>
+        <li>
+          4. Implementare l'endpoint di inserimento con metodo
+          <code>POST /api/articoli</code>. Abilitare esplicitamente il
+          middleware globale <code>express.json()</code>. La rotta deve
+          intercettare l'oggetto JSON propagato nel body dal client, instanziare
+          un nuovo documento conforme al modello Mongoose ed effettuarne il
+          salvataggio asincrono persistente sul database tramite
+          <code>await nuovoArticolo.save()</code>. Verificare l'esito delle
+          chiamate ed il corretto inserimento dei record inviando payload di
+          test mediante un client API (Postman / Thunder Client).
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      function downloadFile() {
+        const htmlContent = document.documentElement.outerHTML
+        const blob = new Blob([htmlContent], { type: "text/html" })
+        const a = document.createElement("a")
+        a.href = URL.createObjectURL(blob)
+        a.download = "backend_exercises_slides.html"
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+      }
+    </script>
+  </body>
+</html>

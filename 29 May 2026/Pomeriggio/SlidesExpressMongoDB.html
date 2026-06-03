@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js & Express: Lezione Completa</title>
+    <style>
+      /* Nord Theme Colors & Material 3 Variables */
+      :root {
+        --md-sys-color-background: #2e3440; /* Nord 0 - Sfondo pagina */
+        --md-sys-color-surface: #3b4252; /* Nord 1 - Sfondo riquadro */
+        --md-sys-color-surface-variant: #434c5e; /* Nord 2 - Separatori interni */
+        --md-sys-color-on-background: #eceff4; /* Nord 6 - Testo primario */
+        --md-sys-color-on-surface: #e5e9f0; /* Nord 5 - Testo secondario */
+        --md-sys-color-primary: #88c0d0; /* Nord 8 - Accento Titoli (Azzurro) */
+        --md-sys-color-secondary: #81a1c1; /* Nord 9 - Accento secondario */
+        --md-sys-color-tertiary: #a3be8c; /* Nord 14 - Verde successo */
+
+        /* Syntax Highlighting Base */
+        --md-sys-color-code-bg: #242933; /* Nord 3 - Sfondo codice */
+        --md-sys-color-code-text: #d8dee9; /* Nord 4 - Testo codice base */
+        --md-sys-color-code-inline: #ebcb8b; /* Nord 13 - Codice inline (Giallo) */
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: var(--md-sys-color-background);
+        color: var(--md-sys-color-on-surface);
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .slide {
+        background-color: var(--md-sys-color-surface);
+        width: 100%;
+        max-width: 950px;
+        margin-bottom: 40px;
+        padding: 45px;
+        border-radius: 28px; /* Material 3 Rounded Card */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        /* Linea superiore rimossa completamente */
+      }
+
+      h2 {
+        color: var(--md-sys-color-primary);
+        margin-top: 0;
+        border-bottom: 2px solid var(--md-sys-color-surface-variant);
+        padding-bottom: 15px;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      h3 {
+        color: var(--md-sys-color-secondary);
+        margin-top: 25px;
+        margin-bottom: 10px;
+        font-size: 22px;
+      }
+
+      ul {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--md-sys-color-on-surface);
+      }
+
+      li {
+        margin-bottom: 12px;
+      }
+
+      strong {
+        color: #fff;
+      }
+
+      pre {
+        background-color: var(--md-sys-color-code-bg);
+        color: var(--md-sys-color-code-text);
+        padding: 20px;
+        border-radius: 16px;
+        overflow-x: auto;
+        font-family: "Fira Code", Consolas, Monaco, monospace;
+        font-size: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        line-height: 1.5;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+        background-color: rgba(235, 203, 139, 0.15);
+        padding: 2px 6px;
+        border-radius: 6px;
+        color: var(--md-sys-color-code-inline);
+        font-size: 0.9em;
+      }
+
+      /* Classi Syntax Highlighting (Tema Nord) */
+      .t-kw {
+        color: #81a1c1;
+      } /* Keyword (if, const, class, async) */
+      .t-str {
+        color: #a3be8c;
+      } /* Stringhe (Verde) */
+      .t-func {
+        color: #88c0d0;
+      } /* Funzioni / Metodi (Azzurro) */
+      .t-num {
+        color: #b48ead;
+      } /* Numeri (Viola) */
+      .t-com {
+        color: #616e88;
+        font-style: italic;
+      } /* Commenti (Grigio) */
+      .t-bool {
+        color: #81a1c1;
+        font-weight: bold;
+      } /* Booleani */
+
+      /* Tabelle */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        padding: 16px;
+        border-bottom: 1px solid var(--md-sys-color-surface-variant);
+        text-align: left;
+        font-size: 17px;
+      }
+      th {
+        color: var(--md-sys-color-primary);
+        font-weight: 700;
+      }
+
+      /* Layout Griglia per Setup */
+      .setup-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-top: 20px;
+      }
+      .setup-card {
+        background-color: var(--md-sys-color-background);
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid var(--md-sys-color-surface-variant);
+      }
+      .setup-card h3 {
+        margin-top: 0;
+        color: var(--md-sys-color-tertiary);
+      }
+
+      /* Box Concetti Mongoose */
+      .term-box {
+        border-left: 4px solid var(--md-sys-color-primary);
+        padding: 15px 20px;
+        background: rgba(136, 192, 208, 0.05);
+        margin: 15px 0;
+        border-radius: 0 12px 12px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide">
+      <h2>Node.js: Runtime Environment e Architettura I/O</h2>
+      <ul>
+        <li>
+          Node.js si definisce formalmente come un runtime environment asincrono
+          basato sul motore JavaScript V8.
+        </li>
+        <li>
+          Consente l'esecuzione nativa di JavaScript sul lato server, garantendo
+          l'accesso diretto a risorse di sistema altrimenti precluse.
+        </li>
+        <li>
+          Fornisce interfacce dirette per la manipolazione del File System e la
+          gestione di socket di rete.
+        </li>
+        <li>
+          Implementa un'architettura di tipo Event-Driven coadiuvata da logiche
+          di Non-Blocking I/O.
+        </li>
+        <li>
+          È strutturato per ottimizzare e sostenere migliaia di connessioni
+          simultanee su un unico thread.
+        </li>
+        <li>
+          Il modulo nativo core <code>http</code> richiede tuttavia una prolissa
+          stesura di codice ripetitivo per il parsing manuale di URL,
+          intestazioni e flussi raw di byte.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Inizializzazione Progetto e Installazione Dipendenze (NPM)</h2>
+      <ul>
+        <li>
+          Prima di scrivere codice, è necessario inizializzare l'ambiente
+          tramite Node Package Manager (NPM).
+        </li>
+        <li>
+          Il comando <code>npm init -y</code> genera il file
+          <code>package.json</code>, indispensabile per tracciare il progetto e
+          le sue dipendenze.
+        </li>
+        <li>
+          Le librerie fondamentali non sono preinstallate. È necessario eseguire
+          l'installazione di Express, Mongoose e i middleware utili:
+        </li>
+      </ul>
+      <pre>npm install express mongoose dotenv cors</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Express.js: Il Framework Minimalista per Node.js</h2>
+      <ul>
+        <li>
+          Express.js costituisce lo standard industriale strutturale adibito
+          allo sviluppo di applicazioni web e API RESTful all'interno
+          dell'ecosistema Node.js.
+        </li>
+        <li>
+          Garantisce caratteristiche di flessibilità estrema essendo un
+          framework di tipo minimalista e unopinionated.
+        </li>
+        <li>
+          Non vincola lo sviluppatore a una rigida predefinizione
+          dell'alberatura dei file di progetto.
+        </li>
+        <li>
+          Funzionalità Core fornite dal framework:
+          <ul>
+            <li>
+              Strumenti di astrazione semplificata per la gestione delle rotte
+              (Routing).
+            </li>
+            <li>
+              Meccanismi ad architettura Middleware per il monitoraggio e
+              controllo dei flussi operativi.
+            </li>
+            <li>
+              Sistemi interni di parsing dei payload (corpi delle richieste HTTP
+              in entrata).
+            </li>
+            <li>
+              Interfacce immediate per la manipolazione e l'invio delle risposte
+              HTTP.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Ambiente di Sviluppo: Nodemon e Variabili d'Ambiente</h2>
+      <ul>
+        <li>
+          <strong>Nodemon:</strong> Per evitare di dover riavviare manualmente
+          il server ad ogni modifica al codice, si utilizza nodemon (<code
+            >npm install -g nodemon</code
+          >). Questo tool riavvia in automatico il processo demone quando rileva
+          salvataggi.
+        </li>
+        <li>
+          <strong>Variabili d'Ambiente (.env):</strong> L'ambiente (environment)
+          è il contesto in cui viene eseguito il server. Informazioni sensibili
+          come credenziali del database o porte di rete non vanno mai scritte
+          hardcoded nel codice sorgente. Si usa il pacchetto
+          <code>dotenv</code> per leggerle da un file nascosto chiamato
+          <code>.env</code>.
+        </li>
+      </ul>
+      <pre>
+<span class="t-func">require</span>(<span class="t-str">'dotenv'</span>).<span class="t-func">config</span>();
+<span class="t-kw">const</span> PORT = process.env.PORT || <span class="t-num">3000</span>;
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Architettura Client-Server e API REST</h2>
+      <ul>
+        <li>
+          La comunicazione fluttua mediante lo scambio deterministico di
+          pacchetti HTTP (Request/Response) tra un client generico e l'istanza
+          del server.
+        </li>
+        <li>
+          Una HTTP Request si compone di: un Metodo (Verbo), un Endpoint (URL),
+          una serie di Headers e un Body opzionale.
+        </li>
+        <li>
+          I Verbi HTTP regolano i criteri per la persistenza e manipolazione dei
+          dati nelle operazioni CRUD:
+          <ul>
+            <li>
+              <strong>GET:</strong> Interrogazione e recupero di record (sola
+              lettura, nessun body).
+            </li>
+            <li>
+              <strong>POST:</strong> Trasmissione payload per l'inserimento e la
+              creazione di un nuovo record.
+            </li>
+            <li>
+              <strong>PUT / PATCH:</strong> Mutazione o sovrascrittura
+              parziale/totale di record esistenti.
+            </li>
+            <li>
+              <strong>DELETE:</strong> Rimozione permanente di una risorsa
+              specifica.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Il server intercetta la richiesta, esegue l'elaborazione e restituisce
+          una HTTP Response provvista di status code standardizzato (es. 200 OK,
+          404 Not Found) e payload JSON.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Sicurezza Base: CORS (Cross-Origin Resource Sharing)</h2>
+      <ul>
+        <li>
+          Per motivi di sicurezza, i browser bloccano di default le richieste
+          HTTP verso un server che risiede su un dominio o una porta diversa
+          (es. Frontend in React su porta 5173, Backend Express su porta 3000).
+        </li>
+        <li>
+          Questo blocco va disabilitato esplicitamente sul backend installando e
+          dichiarando il middleware <code>cors</code>, permettendo così al
+          client web di comunicare regolarmente con le nostre API.
+        </li>
+      </ul>
+      <pre>
+<span class="t-kw">const</span> cors = <span class="t-func">require</span>(<span class="t-str">'cors'</span>);
+app.<span class="t-func">use</span>(<span class="t-func">cors</span>()); <span class="t-com">// Abilita le richieste da altri domini</span>
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Configurazione Minimale di un Server Express</h2>
+      <ul>
+        <li>
+          Dichiarazione sintattica fondamentale per l'istanziazione di
+          un'applicazione Express e l'attivazione del processo demone in ascolto
+          su una porta di rete:
+        </li>
+      </ul>
+      <pre>
+<span class="t-kw">const</span> express = <span class="t-func">require</span>(<span class="t-str">'express'</span>);
+<span class="t-kw">const</span> cors = <span class="t-func">require</span>(<span class="t-str">'cors'</span>);
+<span class="t-func">require</span>(<span class="t-str">'dotenv'</span>).<span class="t-func">config</span>();
+
+<span class="t-kw">const</span> app = <span class="t-func">express</span>();
+<span class="t-kw">const</span> PORT = process.env.PORT || <span class="t-num">3000</span>;
+
+app.<span class="t-func">use</span>(<span class="t-func">cors</span>());
+
+<span class="t-com">// Il metodo listen avvia il server e blocca la porta specificata</span>
+app.<span class="t-func">listen</span>(PORT, () => {
+    console.<span class="t-func">log</span>(<span class="t-str">"Processo server attivo sulla porta di rete:"</span>, PORT);
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Gestione delle Rotte (Routing) e Oggetti Req/Res</h2>
+      <ul>
+        <li>
+          Il routing associa un endpoint e un metodo HTTP a una specifica
+          funzione di callback incaricata di elaborare i parametri di Request
+          (req) e Response (res):
+        </li>
+      </ul>
+      <pre>
+<span class="t-com">// Definizione di endpoint GET con serializzazione JSON automatica</span>
+app.<span class="t-func">get</span>(<span class="t-str">'/api/stato'</span>, (req, res) => {
+    res.<span class="t-func">json</span>({ server: <span class="t-str">"online"</span>, timestamp: Date.<span class="t-func">now</span>() });
+});
+
+<span class="t-com">// Gestione di endpoint dinamici mediante l'uso di Route Parameters (:id)</span>
+app.<span class="t-func">get</span>(<span class="t-str">'/api/utenti/:id'</span>, (req, res) => {
+    <span class="t-kw">const</span> idUtente = req.params.id; <span class="t-com">// Estrazione del parametro dinamico dall'URL</span>
+    res.<span class="t-func">json</span>({ id: idUtente, recuperato: <span class="t-bool">true</span> });
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Ricezione di Payload nel Body (Richieste POST)</h2>
+      <ul>
+        <li>
+          Per specifica, Express non effettua la decodifica automatica dei corpi
+          delle richieste. È imperativo registrare preventivamente il middleware
+          di parsing del formato JSON:
+        </li>
+      </ul>
+      <pre>
+<span class="t-com">// Configurazione del middleware nativo per l'intercettazione e il parsing di JSON</span>
+app.<span class="t-func">use</span>(express.<span class="t-func">json</span>());
+
+app.<span class="t-func">post</span>(<span class="t-str">'/api/prodotti'</span>, (req, res) => {
+    <span class="t-kw">const</span> nuovoProdotto = req.body; <span class="t-com">// Accesso all'oggetto JSON già decodificato</span>
+    console.<span class="t-func">log</span>(<span class="t-str">"Oggetto inserito:"</span>, nuovoProdotto);
+    
+    <span class="t-com">// Restituzione dello status HTTP 201 (Created) con annesso payload di conferma</span>
+    res.<span class="t-func">status</span>(<span class="t-num">201</span>).<span class="t-func">json</span>(nuovoProdotto);
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Completamento del CRUD (PUT e DELETE)</h2>
+      <ul>
+        <li>
+          Per avere una gestione dati completa, servono anche gli endpoint per
+          aggiornare e rimuovere record dal sistema.
+        </li>
+        <li>
+          L'operazione di PUT riceve l'ID del record come parametro e i nuovi
+          dati all'interno del body della richiesta.
+        </li>
+        <li>
+          L'operazione di DELETE riceve solo l'ID da eliminare, rispondendo
+          tipicamente con uno status code "204 No Content" e senza payload.
+        </li>
+      </ul>
+      <pre>
+<span class="t-com">// PUT: Aggiornamento record</span>
+app.<span class="t-func">put</span>(<span class="t-str">'/api/utenti/:id'</span>, (req, res) => {
+    <span class="t-kw">const</span> id = req.params.id;
+    <span class="t-kw">const</span> updateDati = req.body;
+    res.<span class="t-func">json</span>({ id: id, aggiornatoCon: updateDati });
+});
+
+<span class="t-com">// DELETE: Rimozione record</span>
+app.<span class="t-func">delete</span>(<span class="t-str">'/api/utenti/:id'</span>, (req, res) => {
+    <span class="t-kw">const</span> id = req.params.id;
+    res.<span class="t-func">status</span>(<span class="t-num">204</span>).<span class="t-func">send</span>(); <span class="t-com">// 204 No Content (eliminato con successo)</span>
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>MongoDB: Il paradigma NoSQL a Documenti</h2>
+      <ul>
+        <li>
+          MongoDB è un database di tipo NoSQL orientato alla persistenza di
+          documenti semistrutturati, slegato da vincoli relazionali tabellari
+          rigidi.
+        </li>
+        <li>
+          L'assenza di schemi preventivi rigidi (schema-less) permette la
+          coesistenza di documenti con campi asimmetrici nella stessa struttura.
+        </li>
+        <li>
+          I dati vengono scritti e archiviati nativamente nel formato binario
+          BSON (Binary JSON), garantendo una corrispondenza perfetta con le
+          strutture a oggetti proprie di JavaScript.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>MongoDB: Due modi per iniziare</h2>
+      <p>
+        MongoDB può essere eseguito localmente sulla propria macchina di
+        sviluppo o direttamente nel Cloud.
+      </p>
+      <div class="setup-grid">
+        <div class="setup-card">
+          <h3>1. In Locale</h3>
+          <ul>
+            <li>
+              Si scarica e installa il pacchetto
+              <strong>MongoDB Community Server</strong>.
+            </li>
+            <li>
+              Si utilizza <strong>MongoDB Compass</strong> (interfaccia grafica
+              ufficiale) per visualizzare e manipolare i dati localmente.
+            </li>
+            <li>
+              Stringa di connessione predefinita:
+              <code>mongodb://127.0.0.1:27017</code>
+            </li>
+          </ul>
+        </div>
+        <div class="setup-card">
+          <h3>2. Nel Cloud (MongoDB Atlas)</h3>
+          <ul>
+            <li>
+              Ci si registra gratuitamente su
+              <strong>mongodb.com/atlas</strong>.
+            </li>
+            <li>
+              Si crea un cluster condiviso gratuito e si configura l'accesso di
+              rete (Network Access) impostandolo su <code>0.0.0.0/0</code> per
+              lo sviluppo.
+            </li>
+            <li>
+              Fornisce una stringa cloud remota pronta all'uso:
+              <code>mongodb+srv://...</code>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <h2>Concetti Base Mongoose: Cos'è una Collection?</h2>
+      <div class="term-box">
+        <strong
+          >Collection (Collezione) = Corrisponde alla Tabella (SQL)</strong
+        >
+      </div>
+      <ul>
+        <li>
+          La Collection è il contenitore fisico ed effettivo all'interno del
+          database (es. la collezione <code>utenti</code>).
+        </li>
+        <li>Al suo interno risiedono i singoli documenti JSON.</li>
+        <li>
+          A livello di database puro, MongoDB non impone regole sulla struttura
+          dei documenti dentro la collezione. La collezione accetta qualsiasi
+          oggetto.
+        </li>
+      </ul>
+    </div>
+
+    <div class="slide">
+      <h2>Concetti Base Mongoose: Cos'è uno Schema?</h2>
+      <div class="term-box">
+        <strong
+          >Schema = Il Regolamento logico dei dati (Esiste solo lato
+          Node)</strong
+        >
+      </div>
+      <ul>
+        <li>
+          Siccome MongoDB è libero e "schema-less", si rischia di salvare dati
+          incoerenti o errati.
+        </li>
+        <li>
+          Lo <strong>Schema</strong> è una configurazione di Mongoose che
+          definisce la struttura rigida e i vincoli di validazione che un
+          documento deve rispettare prima di essere salvato (es. tipi di dato,
+          campi obbligatori).
+        </li>
+      </ul>
+      <pre>
+<span class="t-kw">const</span> utenteSchema = <span class="t-kw">new</span> mongoose.<span class="t-func">Schema</span>({
+    nome: { type: String, required: <span class="t-bool">true</span> },
+    eta: Number
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Concetti Base Mongoose: Cos'è un Model?</h2>
+      <div class="term-box">
+        <strong>Model (Modello) = Lo Strumento Operativo per le Query</strong>
+      </div>
+      <ul>
+        <li>
+          Lo Schema da solo è solo una configurazione passiva. Per interagire
+          con il database serve il <strong>Model</strong>.
+        </li>
+        <li>
+          Il Model è una classe costruttrice generata partendo dallo Schema.
+          Rappresenta l'interfaccia logica per eseguire operazioni CRUD (es.
+          <code>Utente.find()</code>, <code>Utente.save()</code>).
+        </li>
+        <li>
+          Il Model mappa automaticamente i tuoi comandi logici sulla Collection
+          fisica di MongoDB.
+        </li>
+      </ul>
+      <pre>
+<span class="t-com">// Compilazione dello Schema in un Model operativo legato alla collection 'utenti'</span>
+<span class="t-kw">const</span> Utente = mongoose.<span class="t-func">model</span>(<span class="t-str">'Utente'</span>, utenteSchema);
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Mappatura Tassonomica: SQL vs MongoDB</h2>
+      <p>
+        Mappatura dei concetti chiave tra i sistemi relazionali tradizionali e
+        il modello NoSQL a documenti:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tabella Relazionale (SQL)</th>
+            <th>Collection (MongoDB)</th>
+            <th>Strumento di Regolamentazione logica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tabella (Struttura Rigida)</td>
+            <td>
+              <strong>Collection</strong> (Insieme flessibile di documenti)
+            </td>
+            <td>
+              Definita nel DB tramite SQL / Validata in Node tramite
+              <strong>Schema</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Riga / Record</td>
+            <td><strong>Document</strong> (Documento BSON/JSON)</td>
+            <td>
+              Istanza creata e manipolata tramite il <strong>Model</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Colonna / Chiave</td>
+            <td><strong>Field</strong> (Campo / Proprietà dell'oggetto)</td>
+            <td>Validato e tipizzato dentro lo <strong>Schema</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="slide">
+      <h2>Connessione a MongoDB tramite Mongoose ODM</h2>
+      <ul>
+        <li>
+          Mongoose è un framework ODM (Object Document Mapper) per Node.js che
+          formalizza l'interazione programmatoria strutturata tra le API di
+          Express e l'istanza MongoDB.
+        </li>
+        <li>
+          La pipeline di comunicazione è asincrona e si basa sul modello a
+          Promise:
+        </li>
+      </ul>
+      <pre>
+<span class="t-kw">const</span> mongoose = <span class="t-func">require</span>(<span class="t-str">'mongoose'</span>);
+
+<span class="t-com">// Attivazione della connessione asincrona verso la URI locale o Cloud Atlas</span>
+mongoose.<span class="t-func">connect</span>(process.env.MONGO_URI || <span class="t-str">'mongodb://127.0.0.1:27017/corso_db'</span>)
+    .<span class="t-func">then</span>(() => console.<span class="t-func">log</span>(<span class="t-str">"Pipeline di comunicazione con MongoDB stabilita."</span>))
+    .<span class="t-func">catch</span>(err => console.<span class="t-func">error</span>(<span class="t-str">"Errore critico durante l'handshake:"</span>, err));
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Definizione dello Schema e del Modello</h2>
+      <ul>
+        <li>
+          Mongoose introduce la rigorosità dei dati mediante l'astrazione dello
+          Schema, definendo le regole di validazione dei campi prima della
+          persistenza nel database:
+        </li>
+      </ul>
+      <pre>
+<span class="t-kw">const</span> utenteSchema = <span class="t-kw">new</span> mongoose.<span class="t-func">Schema</span>({
+    nome: { type: String, required: <span class="t-bool">true</span> }, <span class="t-com">// Vincolo di obbligatorietà del dato</span>
+    email: { type: String, unique: <span class="t-bool">true</span> },  <span class="t-com">// Indice di univocità a livello database</span>
+    eta: Number,
+    attivo: { type: Boolean, default: <span class="t-bool">true</span> }
+});
+
+<span class="t-com">// Generazione del Modello operativo vincolato alla collection 'utenti'</span>
+<span class="t-kw">const</span> Utente = mongoose.<span class="t-func">model</span>(<span class="t-str">'Utente'</span>, utenteSchema);
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Integrazione Full-Stack: Express, Mongoose e Async/Await</h2>
+      <ul>
+        <li>
+          L'interrogazione del database è un processo asincrono di I/O di rete.
+          Le callback di instradamento di Express devono impiegare la sintassi
+          async/await combinata con blocchi try...catch:
+        </li>
+      </ul>
+      <pre>
+<span class="t-com">// GET: Estrazione asincrona massiva di documenti della collection</span>
+app.<span class="t-func">get</span>(<span class="t-str">'/api/utenti'</span>, <span class="t-kw">async</span> (req, res) => {
+    <span class="t-kw">try</span> {
+        <span class="t-com">// Sospensione locale della routine fino al recupero dei dati dal database</span>
+        <span class="t-kw">const</span> listaUtenti = <span class="t-kw">await</span> Utente.<span class="t-func">find</span>();
+        res.<span class="t-func">json</span>(listaUtenti);
+    } <span class="t-kw">catch</span> (error) {
+        <span class="t-com">// Intercettazione guasti per prevenire il crash incontrollato del demone server</span>
+        res.<span class="t-func">status</span>(<span class="t-num">500</span>).<span class="t-func">json</span>({ errore: <span class="t-str">"Latenza database o query malformata"</span> });
+    }
+});
+</pre>
+    </div>
+
+    <div class="slide">
+      <h2>Persistenza dei Dati dal Client al Database</h2>
+      <ul>
+        <li>
+          Analisi del flusso completo per la cattura di un payload JSON
+          trasmesso dal client e la sua successiva validazione e memorizzazione
+          persistente all'interno di MongoDB:
+        </li>
+      </ul>
+      <pre>
+app.<span class="t-func">post</span>(<span class="t-str">'/api/utenti'</span>, <span class="t-kw">async</span> (req, res) => {
+    <span class="t-kw">try</span> {
+        <span class="t-com">// Istanziazione di un nuovo documento basato sul body della richiesta</span>
+        <span class="t-kw">const</span> nuovoUtente = <span class="t-kw">new</span> <span class="t-func">Utente</span>(req.body);
+        
+        <span class="t-com">// Esecuzione della scrittura fisica asincrona all'interno della collection</span>
+        <span class="t-kw">await</span> nuovoUtente.<span class="t-func">save</span>();
+        
+        res.<span class="t-func">status</span>(<span class="t-num">201</span>).<span class="t-func">json</span>(nuovoUtente);
+    } <span class="t-kw">catch</span> (error) {
+        <span class="t-com">// Cattura fallimenti legati a violazioni di validazione dello schema</span>
+        res.<span class="t-func">status</span>(<span class="t-num">400</span>).<span class="t-func">json</span>({ errore: <span class="t-str">"Payload non conforme ai vincoli dello schema"</span> });
+    }
+});
+</pre>
+    </div>
+  </body>
+</html>
