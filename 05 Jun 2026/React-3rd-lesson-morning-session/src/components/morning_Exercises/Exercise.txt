@@ -1,0 +1,7 @@
+creare component jsonplaceholderget che fa una chiamata get e mostra tutti i posts di jsonplaceholder.
+
+Questo componente deve avere all'inizio, prima di postare tutti i post un form che in cui l'utente deve inserire un nuovo post da aggiungere (rispettando la struttura dei post di jsonplaceholder)
+
+I dati compilati dall'utente nel form devono essere passati a un componente figlio insieme a una chiamata post per inviare i dati all'api
+
+Il componente figlio deve contenere un solo bottone che fa partire la chiamata post con i dati giusti da inviare all'api
