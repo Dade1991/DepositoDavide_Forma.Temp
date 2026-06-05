@@ -41,7 +41,7 @@ function JsonPlaceholderGet() {
             userId: Number(data.userId), // converto in numero con Number(..)
         }
 
-        // Qui parte la chiamata API POST vera e propria
+        // Qui parte la chiamata API POST vera e propria: questa chiamata API ha nei suoi argomenti/parametri, anche un oggetto da inviare (payload della richiesta) che abbiamo definito prima
 
         axios.post("https://jsonplaceholder.typicode.com/posts", postToSend).then((res) => {
             // "res.data" contiene i dati dell'oggetto post creato dal server
