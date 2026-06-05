@@ -1,11 +1,22 @@
-// Ora che siamo arrivati al figlio, possiamo notare come non debbano essere passati dati
-// è un semplice bottone di submit (è importante che sia presente: type="submit" come attributo del tag button)
-// Il submit vero però è stato definito nell'altro componente "Padre" di questo grazie a react-hook-form
+// Questo componente è il FIGLIO: contiene un solo bottone
+// Non legge direttamente i dati del form, ma riceve dal PADRE una funzione via props
+// La funzione props.onCreatePost, quando chiamata, esegue la POST con i dati compilati nel form
 
-function CreatePostButton() {
+function CreatePostButton(props) {
+    // Quando l'utente clicca il bottone, il figlio chiama la funzione ricevuta dal padre
+    // In questo modo è il bottone del FIGLIO a "far partire" la chiamata POST
+
+    const handleClick = () => {
+        props.onCreatePost()
+    }
     return (
         <>
-            <button type="submit">Invia nuovo Post</button>
+            {/* Quando l'utente clicca il bottone, il figlio chiama la funzione ricevuta dal padre */}
+            {/* In questo modo è il bottone del FIGLIO a "far partire" la chiamata POST */}
+
+            <button type="button" onClick={handleClick}>
+                Invia nuovo Post
+            </button>
         </>
     )
 }

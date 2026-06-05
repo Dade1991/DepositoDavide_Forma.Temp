@@ -4,7 +4,7 @@ import CreatePostButton from "./CreatePostButton"
 import axios from "axios"
 
 function JsonPlaceholderGet() {
-    // ========== VARIABLES, OBJ, UTLITIES ==========
+    // ========== VARIABLES, OBJ, UTLITIES & SETTINGS ==========
 
     // Inizializzo stato che contiene tutti i post recuperati dalla GET
 
@@ -65,7 +65,7 @@ function JsonPlaceholderGet() {
 
                 {/* === FORM === */}
 
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={(event) => event.preventDefault()}>
                     <div>
                         <label>Titolo:</label>
 
@@ -96,7 +96,7 @@ function JsonPlaceholderGet() {
                     semplice bottone. I dati verranno tutti gestiti da questo attuale componente
                     "Padre" */}
 
-                    <CreatePostButton />
+                    <CreatePostButton onCreatePost={handleSubmit(onSubmit)} />
                 </form>
 
                 {/* === POSTS === */}
