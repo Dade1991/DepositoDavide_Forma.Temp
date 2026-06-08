@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import { useWeatherState } from "../store/useWeatherStore"
 
 function DettagliMeteo() {
     const [city, setCity] = useState(null)
@@ -13,7 +14,7 @@ function DettagliMeteo() {
 
     const navigate = useNavigate()
 
-    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY
+    const { apiKey, baseUrl, country, lang, units } = useWeatherState()
 
     useEffect(() => {
         setLoading(true)
@@ -22,10 +23,10 @@ function DettagliMeteo() {
         axios
             .get(`https://api.openweathermap.org/data/2.5/weather`, {
                 params: {
-                    q: `${selectedCity},IT`,
+                    q: `${selectedCity},${country}`,
                     appid: apiKey,
-                    units: `metric`,
-                    lang: `it`,
+                    units,
+                    lang,
                 },
             })
             .then((res) => {
@@ -36,7 +37,7 @@ function DettagliMeteo() {
                 setError(`City not found :/`)
                 setLoading(false)
             })
-    }, [apiKey, selectedCity])
+    }, [apiKey, baseUrl, country, lang, units, selectedCity])
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>{error}</p>

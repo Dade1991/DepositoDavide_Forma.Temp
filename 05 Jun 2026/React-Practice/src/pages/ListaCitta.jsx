@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useWeatherState } from "../store/useWeatherStore"
 
 function ListaCitta() {
     // ==========  ==========
@@ -12,7 +13,7 @@ function ListaCitta() {
 
     const navigate = useNavigate()
 
-    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY
+    const { apiKey, baseUrl, lang, units } = useWeatherState()
 
     // ==========  ==========
 
@@ -31,8 +32,8 @@ function ListaCitta() {
                 params: {
                     q: `${cityName}`,
                     appid: apiKey,
-                    units: `metric`,
-                    lang: `it`,
+                    units,
+                    lang,
                 },
             }),
         )
@@ -47,7 +48,7 @@ function ListaCitta() {
                 setError(`Error during weather loading`)
                 setLoading(false)
             })
-    }, [apiKey])
+    }, [apiKey, baseUrl, lang, units])
 
     // ==========  ==========
 
