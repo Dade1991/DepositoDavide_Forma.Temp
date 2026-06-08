@@ -1,0 +1,81 @@
+#  Esercitazione React: Web App Meteo con React Router e Axios
+
+### Obiettivo dell'esercizio
+
+Creare una Single Page Application (SPA) in React che permetta agli utenti di visualizzare le previsioni del tempo di diverse città. L'applicazione utilizzerà **React Router** per la navigazione tra le pagine e **Axios** per recuperare i dati in tempo reale dall'API pubblica di OpenWeatherMap.
+
+---
+
+##  Requisiti Tecnici
+
+1. **React Router Dom**: Gestione della navigazione senza ricaricare la pagina.
+2. **Axios**: Chiamate HTTP asincrone (GET) verso l'API.
+3. **OpenWeatherMap API**: Utilizzo dell'endpoint per il meteo corrente.
+* *URL di base per la ricerca:* `https://api.openweathermap.org/data/2.5/weather?q={nome_città}&appid={tua_api_key}&units=metric&lang=it`
+
+
+
+---
+
+##  Consegna e Struttura del Progetto
+
+Il progetto dovrà essere diviso in modo modulare con la seguente struttura di pagine:
+
+### 1. Pagina Principale / Home (`ListaCitta.jsx` -> Percorso: `/`)
+
+Questa pagina rappresenta la dashboard principale.
+
+* Deve mostrare un elenco di almeno **3 o 4 città predefinite** (es. Milano, Roma, Pisa, Napoli) sotto forma di **Card**.
+* Ogni Card deve mostrare semplicemente il nome della città e un pulsante *"Vedi Meteo"*.
+* Al click sul pulsante, l'applicazione deve reindirizzare programmaticamente l'utente alla pagina di dettaglio di quella specifica città usando il hook `useNavigate`.
+
+### 2. Pagina di Dettaglio Meteo (`DettaglioMeteo.jsx` -> Percorso: `/meteo/:citta`)
+
+Questa pagina si attiva dinamicamente in base alla città selezionata (es. `/meteo/pisa`).
+
+* Deve recuperare il parametro dinamico `:citta` dall'URL utilizzando il hook `useParams`.
+* Appena il componente viene montato (`useEffect`), deve inviare una richiesta **GET con Axios** a OpenWeatherMap usando il nome della città recuperato dall'URL.
+* **Gestione degli Stati**: Mostrare a schermo un messaggio di *"Caricamento..."* durante l'attesa della risposta e gestire eventuali errori (es. città non trovata).
+* **Dati da stampare a schermo (una volta ricevuti):**
+* Nome della città.
+* Temperatura corrente (in gradi Celsius).
+* Descrizione del meteo (es. "cielo sereno", "pioggia leggera").
+* Umidità e velocità del vento.
+
+
+* Deve essere presente un pulsante **" Torna alla Home"** che riporti l'utente alla dashboard sfruttando la cronologia del router (`Maps(-1)` o `Maps('/')`).
+
+### 3. Barra di Navigazione Fissa (`Navbar`)
+
+* Presente in tutte le pagine dell'applicazione.
+* Deve contenere un `NavLink` verso la Home Page.
+* Il link deve cambiare colore (es. diventare `gold` o ricevere una classe `.active`) quando l'utente si trova effettivamente sulla Home.
+
+---
+
+##  Suggerimenti per lo Sviluppo (Tips per gli studenti)
+
+* **API Key**: Create un account gratuito su [OpenWeatherMap](https://openweathermap.org/) per ottenere la vostra `API_KEY` personale. *Attenzione: appena attivata, la chiave potrebbe impiegare da qualche minuto a un paio d'ore per diventare effettiva.*
+* **Sintassi di useParams**: Ricorda che il nome che assegni alla variabile in `App.jsx` (es. `:citta`) deve essere lo stesso identico che estrai nel componente di dettaglio (`const { citta } = useParams()`).
+* **Struttura delle cartelle consigliata:**
+```text
+src/
+├── pages/
+│   ├── ListaCitta.jsx
+│   └── DettaglioMeteo.jsx
+├── App.jsx
+├── main.jsx
+└── index.css
+
+```
+
+
+
+---
+
+
+
+Per chi finisce prima:
+
+1. **Icone Meteo**: OpenWeatherMap restituisce nel JSON un codice icona (es. `01d`). Prova a stampare l'immagine corrispondente usando l'URL ufficiale: `https://openweathermap.org/img/wn/{codice_icona}@2x.png`.
+2. **Ricerca Libera**: Aggiungi un input di testo nella Home che permetta all'utente di digitare una città a piacimento e, premendo "Invio", navigare dinamicamente verso il meteo di quella città.

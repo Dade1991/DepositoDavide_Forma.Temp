@@ -1,8 +1,7 @@
+import { Routes, Route, NavLink } from "react-router-dom"
 import "./App.css"
-import About from "./pages/About"
-import Home from "./pages/Home"
-import DettaglioNome from "./pages/DettaglioNome"
-import { NavLink, Routes, Route } from "react-router-dom"
+import ListaPost from "./components/ListaPost"
+import DettaglioPost from "./components/DettaglioPost"
 
 function App() {
     const showActiveStyle = ({ isActive }) => ({
@@ -16,14 +15,11 @@ function App() {
                 <NavLink to="/" style={showActiveStyle}>
                     Home
                 </NavLink>
-                <NavLink to="/about" style={showActiveStyle}>
-                    About
-                </NavLink>
             </nav>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />}>
-                    <Route path=":nome" element={<DettaglioNome />} />
+                <Route>
+                    <Route path="/" element={<ListaPost />} />
+                    <Route path="/posts/:id" element={<DettaglioPost />} />
                 </Route>
             </Routes>
         </div>
