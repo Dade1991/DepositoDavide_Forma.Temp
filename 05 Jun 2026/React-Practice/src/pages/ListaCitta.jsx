@@ -1,54 +1,24 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useWeatherState } from "../store/useWeatherStore"
 
 function ListaCitta() {
     // ==========  ==========
-    const [cities, setCities] = useState([])
 
-    const [loading, setLoading] = useState(true)
+    const cities = useWeatherState((state) => state.cities)
+    const loading = useWeatherState((state) => state.loading)
+    const error = useWeatherState((state) => state.error)
+    const fetchCities = useWeatherState((state) => state.fetchCities)
 
-    const [error, setError] = useState("")
+    // ==========  ==========
 
     const navigate = useNavigate()
-
-    const { apiKey, baseUrl, lang, units } = useWeatherState()
 
     // ==========  ==========
 
     useEffect(() => {
-        const cityToShow = [
-            `Piacenza`,
-            `Enna`,
-            `Bologna`,
-            `Roma`,
-            `Milano`,
-            `Firenze`,
-        ]
-
-        const req = cityToShow.map((cityName) =>
-            axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
-                params: {
-                    q: `${cityName}`,
-                    appid: apiKey,
-                    units,
-                    lang,
-                },
-            }),
-        )
-
-        Promise.all(req)
-            .then((res) => {
-                const data = res.map((res) => res.data)
-                setCities(data)
-                setLoading(false)
-            })
-            .catch(() => {
-                setError(`Error during weather loading`)
-                setLoading(false)
-            })
-    }, [apiKey, baseUrl, lang, units])
+        fetchCities()
+    }, [fetchCities])
 
     // ==========  ==========
 

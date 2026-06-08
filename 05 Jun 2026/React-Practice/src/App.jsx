@@ -10,7 +10,10 @@ function App() {
             <CustomNavbar />
             <Routes>
                 <Route path="/" element={<ListaCitta />} />
-                <Route path="/meteo/:citta" element={<DettagliMeteo />} />
+                <Route
+                    path="/meteo/:selectedCity"
+                    element={<DettagliMeteo />}
+                />
             </Routes>
         </>
     )
