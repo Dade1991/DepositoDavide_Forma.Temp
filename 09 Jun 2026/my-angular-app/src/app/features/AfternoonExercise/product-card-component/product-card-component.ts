@@ -17,7 +17,7 @@ price: number = 89.90
 discount: number = 0.20
 stock: number = 2
 imageUrl: string = "https://picsum.photos/300/200"
-tags: string[] = ["outdoor", "sport", "impermeabile"]
+tags: string[] = ["outdoor", "sport", "waterproof"]
 available: boolean = true
 
 // =====
