@@ -6,10 +6,11 @@ import { ParagraphComponent } from "./features/paragraph-component/paragraph-com
 import { ImageComponent } from "./features/image-component/image-component";
 import { BindingComponent } from "./features/binding-component/binding-component";
 import { ProductCardComponent } from "./features/AfternoonExercise/product-card-component/product-card-component";
+import { DirectivesComponent } from "./features/directives-component/directives-component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BaseComponent, TitleComponent, ParagraphComponent, ImageComponent, BindingComponent, ProductCardComponent],
+  imports: [RouterOutlet, BaseComponent, TitleComponent, ParagraphComponent, ImageComponent, BindingComponent, ProductCardComponent, DirectivesComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

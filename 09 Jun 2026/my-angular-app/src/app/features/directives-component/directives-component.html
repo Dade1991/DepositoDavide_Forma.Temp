@@ -1,0 +1,82 @@
+<h2>@IF</h2>
+
+<!-- Costruzione: annotazione @if(condizioni){cosa deve succedere} -->
+
+<button (click)="isVisibile = !isVisibile">Toogle</button>
+
+<p>è visibile? {{isVisibile}}</p>
+
+@if(isVisibile) {
+<p>Questo componente appare e scopare alla pressione del bottone qui sopra</p>
+}
+
+<h2>@IF@ELSEIF@ELSE</h2>
+
+<!-- Costruzione: annotazione @else if(condizioni){cosa deve succedere} // ultimo @else no condizione perchè sarebbe come il "default"-->
+
+<button (click)="incrementLevel()">Aumenta livello</button>
+
+@if(userLevel <=1){
+  <p style="color: red; font-weight: bold">Sei un principiante</p>
+}
+@else if(userLevel === 2){
+    <p style="color: orange; font-weight: bold">Sei intermedio</p>
+}
+@else if(userLevel === 3){
+    <p style="color: yellow; font-weight: bold">Sei bravino</p>
+}
+@else{
+      <p style="color: green; font-weight: bold">Sei un PRO</p>
+}
+
+<h2>@FOR</h2>
+
+<!-- Costruzione: annotazione @for(e of nomeDellArray; track - e; let i = $index){cosa deve succedere} -->
+
+<select [(ngModel)]="favFramework" >
+  @for(e of frameworks; track e; let i = $index){
+<option [value]="e">{{i}} -- {{e}}</option>
+  }
+</select>
+
+<h2>@SWITCH</h2>
+
+<!-- Costruzione: annotazione @switch(condizione scelta){
+  @case("condizione caso 1"){
+  cosa fa il caso 1}
+  @case("condizione caso 2"){
+  cosa fa il caso 2}
+  }
+  @default{
+  cosa fa il default
+  }
+  -->
+
+@switch (favFramework){
+  @case("Angular"){
+    <p>Hai scelto Angular!</p>
+  }
+  @case("React"){
+    <p>Hai scelto React!</p>
+  }
+  @case("Vue.js"){
+    <p>Hai scelto Vue.js!</p>
+  }
+  @default {
+    <p>Hai scelto Three.js!</p>
+  }
+}
+
+
+<h2>@NGCLASS & NGSTYLE</h2>
+
+@if(showList){
+  <ul>
+    @for(e of framewokrs; track e; let i = $index){
+      <li
+        [ngClass]="{'highlight': e === favFramework}"
+        [ngStyle]="{'font-weight': (i % 2 === 0 && e !== favFramework) ? 'bold' : 'normal', 'background-color' : e !== favFramework ? 'blue' : ''}">
+      </li>
+    }
+  </ul>
+}
