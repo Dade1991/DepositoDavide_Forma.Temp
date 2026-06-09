@@ -1,0 +1,19 @@
+<div class="cardBinding">
+  <!-- Property Binding -->
+  <img [src]="imageUrl">
+  <!-- Interpolation -->
+  <p><strong>Nome : </strong>{{name}} - <strong>Brand : </strong>{{brand}}</p>
+  <p><strong>Final Price : </strong>{{finalPrice()}} € <span class="cardSpan">(20% discount applied)</span>
+  </p>
+  <p><strong>Tags : </strong>{{tags.join(', ')}}</p>
+  <p><strong>Stock : </strong>{{stock}}</p>
+  <p><strong>Availability : </strong>{{available ? 'Available' : 'Not available'}}</p>
+  <!-- Event Binding -->
+  <button (click)="purchase()" [disabled]="!available">BUY</button>
+</div>
+
+<!-- Two-Way Binding -->
+
+<p>Perchè non cambiare il nome ad un prodotto? Prova:</p>
+<input [(ngModel)]="name" placeholder="Modify name of the product">
+

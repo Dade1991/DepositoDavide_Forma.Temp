@@ -7,3 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './paragraph-component.css',
 })
 export class ParagraphComponent {}
+
+

@@ -1,0 +1,23 @@
+.cardBinding{
+  background-color: rgb(201, 245, 245);;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 6px 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.cardSpan{
+  color: red;
+}
+
+img{
+  border-radius: 30px;
+}
+
+button{
+  border-radius: 14px;
+}
+
+input{
+
+  border-radius: 14px;
+}
