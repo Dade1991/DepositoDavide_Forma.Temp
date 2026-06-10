@@ -4,10 +4,10 @@
 
 <button (click)="isVisibile = !isVisibile">Toogle</button>
 
-<p>è visibile? {{isVisibile}}</p>
+<p>è visibile? {{ isVisibile }}</p>
 
-@if(isVisibile) {
-<p>Questo componente appare e scopare alla pressione del bottone qui sopra</p>
+@if (isVisibile) {
+  <p>Questo componente appare e scopare alla pressione del bottone qui sopra</p>
 }
 
 <h2>@IF@ELSEIF@ELSE</h2>
@@ -16,26 +16,23 @@
 
 <button (click)="incrementLevel()">Aumenta livello</button>
 
-@if(userLevel <=1){
+@if (userLevel <= 1) {
   <p style="color: red; font-weight: bold">Sei un principiante</p>
-}
-@else if(userLevel === 2){
-    <p style="color: orange; font-weight: bold">Sei intermedio</p>
-}
-@else if(userLevel === 3){
-    <p style="color: yellow; font-weight: bold">Sei bravino</p>
-}
-@else{
-      <p style="color: green; font-weight: bold">Sei un PRO</p>
+} @else if (userLevel === 2) {
+  <p style="color: orange; font-weight: bold">Sei intermedio</p>
+} @else if (userLevel === 3) {
+  <p style="color: yellow; font-weight: bold">Sei bravino</p>
+} @else {
+  <p style="color: green; font-weight: bold">Sei un PRO</p>
 }
 
 <h2>@FOR</h2>
 
 <!-- Costruzione: annotazione @for(e of nomeDellArray; track - e; let i = $index){cosa deve succedere} -->
 
-<select [(ngModel)]="favFramework" >
-  @for(e of frameworks; track e; let i = $index){
-<option [value]="e">{{i}} -- {{e}}</option>
+<select [(ngModel)]="favFramework">
+  @for (e of frameworks; track e; let i = $index) {
+    <option [value]="e">{{ i }} -- {{ e }}</option>
   }
 </select>
 
@@ -52,14 +49,14 @@
   }
   -->
 
-@switch (favFramework){
-  @case("Angular"){
+@switch (favFramework) {
+  @case ('Angular') {
     <p>Hai scelto Angular!</p>
   }
-  @case("React"){
+  @case ('React') {
     <p>Hai scelto React!</p>
   }
-  @case("Vue.js"){
+  @case ('Vue.js') {
     <p>Hai scelto Vue.js!</p>
   }
   @default {
@@ -67,15 +64,19 @@
   }
 }
 
-
 <h2>@NGCLASS & NGSTYLE</h2>
 
-@if(showList){
+@if (showList) {
   <ul>
-    @for(e of framewokrs; track e; let i = $index){
+    @for (e of frameworks; track e; let i = $index) {
       <li
-        [ngClass]="{'highlight': e === favFramework}"
-        [ngStyle]="{'font-weight': (i % 2 === 0 && e !== favFramework) ? 'bold' : 'normal', 'background-color' : e !== favFramework ? 'blue' : ''}">
+        [ngClass]="{ highlight: e === favFramework }"
+        [ngStyle]="{
+          'font-weight': i % 2 === 0 && e !== favFramework ? 'bold' : 'normal',
+          'background-color': e !== favFramework ? 'blue' : '',
+        }"
+      >
+        {{ i }} -{{ e }}
       </li>
     }
   </ul>

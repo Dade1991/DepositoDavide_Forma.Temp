@@ -1,0 +1,41 @@
+<!-- Utilizzo le Directives Strutturali con IF per verificare che si verifichi una condizione, se si (ovvero mostrare un messaggio se la lista aè vuota), se no (non ci sono studenti o l'array è pari ad una lunghezza 0) ritorna la lista -->
+
+@if (!students || students.length === 0) {
+  <p>No students are available</p>
+} @else {
+  <ul>
+    <!-- Utilizzo le Directives Strutturali con FOR per ciclare l'array definito sul file TS.
+    Per ciascuno Studente, dell'array Studenti, traccia l'elemento (track) a partire dal nome dello Studente -->
+
+    @for (student of students; track student.name) {
+      <li>
+        Name: {{ student.name }}
+
+        @if (!student.present) {
+          <span appHighlightsDirectives>(absent)</span>
+        } @else {
+          - Grade:
+
+          <!-- Utilizzo le Directives Strutturali con SWITCH per definire
+          in quale caso stampare il valore stringa preso dal dato numerico corrispondente (da metodo
+          definito nel file TS) -->
+
+          @switch (getCategoryGrade(student.grade)) {
+            @case ('Awesome') {
+              Awesome
+            }
+            @case ('Good') {
+              Good
+            }
+            @case ('Sufficent') {
+              Sufficent
+            }
+            @default {
+              Insufficent
+            }
+          }
+        }
+      </li>
+    }
+  </ul>
+}
