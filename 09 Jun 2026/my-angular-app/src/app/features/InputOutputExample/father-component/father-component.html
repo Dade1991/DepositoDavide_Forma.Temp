@@ -1,0 +1,6 @@
+<p>father-component works!</p>
+
+<p>Counter (father): {{ counter }}</p>
+
+<app-child-component [childCounter]="counter" (counterChange)="onCounterChange($event)">
+</app-child-component>

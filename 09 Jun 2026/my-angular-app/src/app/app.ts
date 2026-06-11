@@ -12,6 +12,10 @@ import { RegistrationComponent } from './features/registration-component/registr
 import { LoginComponent } from './features/login-component/login-component';
 import { DrivenFormComponent } from './features/Exercises11May/driven-form-component/driven-form-component';
 import { ReactiveFormComponent } from './features/Exercises11May/reactive-form-component/reactive-form-component';
+import { FatherComponent } from './features/InputOutputExample/father-component/father-component';
+import { SignalExampleComponent } from './features/signal-example-component/signal-example-component';
+import { TrafficLightComponent } from './features/Exercises11May/SignalExe/traffic-light-component/traffic-light-component';
+import { PriceComponent } from './features/Exercises11May/SignalExe/price-component/price-component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +33,10 @@ import { ReactiveFormComponent } from './features/Exercises11May/reactive-form-c
     LoginComponent,
     DrivenFormComponent,
     ReactiveFormComponent,
+    FatherComponent,
+    SignalExampleComponent,
+    TrafficLightComponent,
+    PriceComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

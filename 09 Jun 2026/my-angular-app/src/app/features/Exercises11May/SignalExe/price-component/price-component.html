@@ -1,0 +1,12 @@
+<h2>Computed Signal - EXE</h2>
+
+<!-- Mostro i valori della composizione del prezzo -->
+<div>
+  <p>Net Price: {{ netPrice() }} €</p>
+  <p>Rate Price: {{ ratePrice() }} %</p>
+  <p>Gross Price: {{ grossPrice() }} € (VAT. included)</p>
+
+  <!-- Input numerico collegato alla funzione in TS per il calcolo di un nuovo valore con iva al 22% -->
+
+  <input type="number" [value]="netPrice" (input)="priceChange($event)" />
+</div>

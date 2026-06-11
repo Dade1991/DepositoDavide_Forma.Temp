@@ -1,0 +1,23 @@
+<p>signal-example-component works!</p>
+
+<h2>Writable Signal</h2>
+
+<p>Contatore = {{ counter() }}</p>
+<button (click)="increment()">+</button>
+<button (click)="decrement()">-</button>
+<button (click)="reset()">RESET</button>
+
+<h2>Computed Signal</h2>
+
+<p>Contatore Double (Computed Signal) = {{ double() }}</p>
+
+<h2>Effect Signal</h2>
+
+<p>Log (ultimi 5 cambiamenti)</p>
+<p>Saluto: {{ saluto() }}</p>
+
+@for (riga of logRighe; track riga) {
+  <div>{{ riga }}</div>
+}
+
+<input type="text" [value]="nome()" (input)="updateNome($event)" />
