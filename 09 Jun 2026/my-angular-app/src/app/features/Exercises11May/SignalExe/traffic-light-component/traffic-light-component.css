@@ -1,10 +1,10 @@
 .trafficLight {
-  width: 120px;
+  width: 145px;
   padding: 16px;
-  border-radius: 16px;
-  background: #222;
+  border-radius: 7px;
+  background: #757474;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 12px;
   align-items: center;
   margin: 0 auto;

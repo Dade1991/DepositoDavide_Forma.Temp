@@ -7,8 +7,9 @@ import { Component, signal } from '@angular/core';
   styleUrl: './traffic-light-component.css',
 })
 export class TrafficLightComponent {
-  // Dichiaro un signal che contiene tutti gli stati (classi da applicare) del semaforo (valore iniziale `red`)
-  trafficLightColors = signal<`red` | `yellow` | `green`>(`red`);
+  // Dichiaro un signal ed imposto valore iniziale a `red`
+
+  trafficLightColors = signal(`red`);
 
   // Al click del pulsante:
   updateColor(): void {

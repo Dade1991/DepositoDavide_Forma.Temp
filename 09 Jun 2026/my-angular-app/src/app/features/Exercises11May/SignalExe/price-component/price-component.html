@@ -8,5 +8,5 @@
 
   <!-- Input numerico collegato alla funzione in TS per il calcolo di un nuovo valore con iva al 22% -->
 
-  <input type="number" [value]="netPrice" (input)="priceChange($event)" />
+  <input type="number" [value]="netPrice()" (input)="priceChange($event)" />
 </div>

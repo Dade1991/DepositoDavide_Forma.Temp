@@ -18,13 +18,14 @@ export class PriceComponent {
   // INizializzo un singnal computed che si occuperà di calcolare il valore del prezzo lordo
 
   grossPrice = computed(() => {
-    return this.netPrice() * (1 + this.ratePrice() / 100); // 1 + ( 22/100 ) = 1,22 per calcolo math
+    return this.netPrice() * (1 + this.ratePrice() / 100); // 1 + ( 22/100 ) = 1,22 per calcolo matematico
   });
 
   // Inizializzo funzione per ascoltare l'evento di change (input di HTML) e lo imposto come nuovo valore di netPrice che mi restituirà il calcolo dell'iva con il nuovo valore inserito
 
   priceChange(event: Event): void {
     const input = event.target as HTMLInputElement;
+    // Devo inizializzare una nuova varibile per castare il valore di input da String a Number
     const newValue = Number(input.value);
     this.netPrice.set(newValue);
   }

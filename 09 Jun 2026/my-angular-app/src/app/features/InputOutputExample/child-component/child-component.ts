@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HighlightsDirectives } from './../../MorningExercise/Directives/highlights-directives';
+import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
 
 @Component({
   selector: 'app-child-component',
@@ -16,5 +17,18 @@ export class ChildComponent {
 
   decrement(): void {
     this.counterChange.emit(--this.childCounter);
+  }
+
+  // migliore sintassi per input ed output - RISPETTO A QUELLA SOPRA (minuscole!!)
+
+  childCounterSignal = input<number>(0);
+  counterChangeSignal = output<number>();
+
+  incrementSignal(): void {
+    this.counterChangeSignal.emit(this.childCounterSignal() + 1);
+  }
+
+  HighlightsDirectivescrementSignal(): void {
+    this.counterChangeSignal.emit(this.childCounterSignal() - 1);
   }
 }
