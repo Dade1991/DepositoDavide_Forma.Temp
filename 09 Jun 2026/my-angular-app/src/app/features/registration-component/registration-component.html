@@ -1,0 +1,21 @@
+<p>Registration Form - Template Driven</p>
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="">Nome: </label>
+    <input name="name" [(ngModel)]="utente.nome" required />
+  </div>
+  <div>
+    <label for="">email: </label>
+    <input name="email" [(ngModel)]="utente.email" required email />
+  </div>
+  <button type="submit" [disabled]="myForm.invalid">Invia</button>
+</form>
+
+@if (myForm.invalid) {
+  <p>Form non valido</p>
+}
+
+@if (submitted) {
+  <p>Dati inviati: {{ utente.nome }} ({{ utente.email }})</p>
+}

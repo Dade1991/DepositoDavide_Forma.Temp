@@ -1,0 +1,69 @@
+<p>Driven Form - Exercise</p>
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <!-- Name -->
+
+  <div>
+    <label>Name: </label>
+    <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required minlength="3" />
+  </div>
+
+  @if (name.invalid && name.touched) {
+    <div style="color: red">
+      @if (name.errors?.['required']) {
+        <span>Name is mandatory</span>
+      } @else if (name.errors?.['minlenght']) {
+        <span>Name shall have at least 3 characters</span>
+      }
+    </div>
+  }
+
+  <!-- Email -->
+
+  <div>
+    <label>Email: </label>
+    <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" required email />
+  </div>
+
+  @if (email.invalid && email.touched) {
+    <div style="color: red">
+      @if (email.errors?.['required']) {
+        <span>Email is mandatory</span>
+      } @else if (email.errors?.['email']) {
+        <span>Please insert a valid Email</span>
+      }
+    </div>
+  }
+
+  <!-- Age -->
+
+  <div>
+    <label>Age: </label>
+    <input type="number" name="age" #age="ngModel" [(ngModel)]="user.age" required min="18" />
+  </div>
+
+  @if (age.invalid && age.touched) {
+    <div style="color: red">
+      @if (age.errors?.['required']) {
+        <span>Age is mandatory</span>
+      } @else if (age.errors?.['min']) {
+        <span>You must be +18 or older</span>
+      }
+    </div>
+  }
+
+  <!-- Button submit -->
+
+  <button type="submit" [disabled]="myForm.invalid">Send</button>
+</form>
+
+<!-- ========== -->
+
+@if (myForm.invalid) {
+  <p>Invalid Form</p>
+}
+
+@if (submitted) {
+  <p>Form successfully submitted.</p>
+  <p>Send data: {{ user.name }} - {{ user.email }} - {{ user.age }}</p>
+}

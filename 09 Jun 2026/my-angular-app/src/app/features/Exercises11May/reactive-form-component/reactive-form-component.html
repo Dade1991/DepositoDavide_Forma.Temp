@@ -1,0 +1,70 @@
+<p>Reactive Form - Exercise</p>
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <!-- obj -->
+
+  <div>
+    <label>Object: </label>
+    <input formControlName="obj" type="text" />
+  </div>
+
+  @if (contactForm.get('obj')?.invalid && contactForm.get('obj')?.touched) {
+    <span>Please, insert a title to your message</span>
+  }
+
+  <!-- message -->
+
+  <div>
+    <label>Message: </label>
+    <input formControlName="message" type="text" rows="3" />
+  </div>
+
+  <div>
+    @if (messageCtrl) {
+      <span> {{ messageCtrl.value?.length || 0 }}/10 characters </span>
+    }
+  </div>
+
+  @if (contactForm.get('message')?.errors?.['minlength'] && contactForm.get('message')?.touched) {
+    <div style="color: red">
+      @if (messageCtrl?.errors?.['required']) {
+        <span>Message is mandatory</span>
+      } @else if (messageCtrl?.errors?.['minLength']) {
+        <span>Message shall be minimum of 10 characters</span>
+      }
+    </div>
+  }
+
+  <!-- urgency -->
+
+  <div>
+    <label>Select a urgency grade: </label>
+    <select formControlName="urgency">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  </div>
+
+  @if (contactForm.get('urgency')?.invalid && contactForm.get('urgency')?.touched) {
+    <div style="color: red">
+      <span>Please, select a urgency grade</span>
+    </div>
+  }
+
+  <!-- Button submit -->
+  @if (contactForm.invalid) {
+    <button type="submit" disabled>Send</button>
+  } @else {
+    <button type="submit">Send</button>
+  }
+</form>
+
+@if (submittedData) {
+  <div style="padding: 1rem">
+    <h4>Submitted data:</h4>
+    <p><strong>Object: </strong> {{ submittedData.obj }}</p>
+    <p><strong>Message: </strong> {{ submittedData.message }}</p>
+    <p><strong>Urgency: </strong> {{ submittedData.urgency }}</p>
+  </div>
+}

@@ -8,6 +8,10 @@ import { BindingComponent } from './features/binding-component/binding-component
 import { ProductCardComponent } from './features/AfternoonExercise/product-card-component/product-card-component';
 import { DirectivesComponent } from './features/directives-component/directives-component';
 import { StudentListComponent } from './features/MorningExercise/student-list-component/student-list-component';
+import { RegistrationComponent } from './features/registration-component/registration-component';
+import { LoginComponent } from './features/login-component/login-component';
+import { DrivenFormComponent } from './features/Exercises11May/driven-form-component/driven-form-component';
+import { ReactiveFormComponent } from './features/Exercises11May/reactive-form-component/reactive-form-component';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +25,10 @@ import { StudentListComponent } from './features/MorningExercise/student-list-co
     ProductCardComponent,
     DirectivesComponent,
     StudentListComponent,
+    RegistrationComponent,
+    LoginComponent,
+    DrivenFormComponent,
+    ReactiveFormComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
