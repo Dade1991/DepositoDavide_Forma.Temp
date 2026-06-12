@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { BaseComponent } from './features/base-component/base-component';
 import { TitleComponent } from './features/title-component/title-component';
 import { ParagraphComponent } from './features/paragraph-component/paragraph-component';
@@ -18,11 +18,18 @@ import { TrafficLightComponent } from './features/Exercises11May/SignalExe/traff
 import { PriceComponent } from './features/Exercises11May/SignalExe/price-component/price-component';
 import { ProductListComponent } from './features/InputOutputExample/Exercise/product-list-component/product-list-component';
 import { FeedbackComponent } from './features/InputOutputExample/Exercise/feedback-component/feedback-component';
+import { ItemListComponent } from './features/item-list-component/item-list-component';
+import { AddItemComponent } from './features/Exercises12June/Exercise1/add-item-component/add-item-component';
+import { ShoppingListComponent } from './features/Exercises12June/Exercise1/shopping-list-component/shopping-list-component';
+import { SettingsComponent } from './features/Exercises12June/Exercise2/settings-component/settings-component';
+import { PreviewComponent } from './features/Exercises12June/Exercise2/preview-component/preview-component';
+import { HomeComponent } from './features/pages/home-component/home-component';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
+    RouterModule,
     BaseComponent,
     TitleComponent,
     ParagraphComponent,
@@ -41,6 +48,12 @@ import { FeedbackComponent } from './features/InputOutputExample/Exercise/feedba
     PriceComponent,
     ProductListComponent,
     FeedbackComponent,
+    ItemListComponent,
+    AddItemComponent,
+    ShoppingListComponent,
+    SettingsComponent,
+    PreviewComponent,
+    HomeComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

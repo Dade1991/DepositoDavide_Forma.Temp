@@ -1,0 +1,23 @@
+<p>shopping-list-component works!</p>
+
+<!-- Controllo che la lista di items non sia vuota, a 0 -->
+
+@if (shoppingListService.items().length === 0) {
+  <p>No item is present into the list</p>
+
+  <!-- Altrimenti, eseguo un ciclo for per ciasciun item da mostrare nella lista -->
+} @else {
+  <ul>
+    @for (item of shoppingListService.items(); track $index) {
+      <li>
+        <!-- Mostro il nome catturato dall'input-->
+
+        <p>Name: {{ item }}</p>
+
+        <!-- Al click, rimuoveremo l'elemento in accordo al suo indice: dato che il bottono è all'interno dell'elemento, sa a quale index fare riferimento -->
+
+        <button (click)="onRemoveItem($index)">Remove item</button>
+      </li>
+    }
+  </ul>
+}

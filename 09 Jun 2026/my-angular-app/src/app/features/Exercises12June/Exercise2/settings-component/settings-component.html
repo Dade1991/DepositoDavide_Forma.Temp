@@ -1,0 +1,17 @@
+<p>settings-component works!</p>
+
+<div>
+  <label for="username">Username</label>
+
+  <input
+    type="text"
+    id="username"
+    [value]="userPreferencesService.username()"
+    (input)="onUsernameinput($event)"
+    placeholder="Insert your name"
+  />
+
+  <!-- Al click eseguiamo la funzione onToggleTheme() EVENT BINDING -->
+
+  <button (click)="onToggleTheme()">Click to switch: Light/Dark theme</button>
+</div>

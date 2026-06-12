@@ -1,0 +1,11 @@
+.previewBox {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+.previewBox.dark {
+  background-color: #222;
+  color: #fff;
+}

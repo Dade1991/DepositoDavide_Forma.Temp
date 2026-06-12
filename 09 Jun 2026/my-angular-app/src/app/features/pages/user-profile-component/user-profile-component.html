@@ -1,0 +1,11 @@
+<p>user-profile-component works!</p>
+
+@if (user(); as u) {
+  <div>
+    <h4>{{ u.name }}</h4>
+    <p>{{ u.email }}</p>
+    <p>{{ u.bio }}</p>
+  </div>
+} @else {
+  <p>User not found</p>
+}

@@ -1,0 +1,9 @@
+<p>item-list-component works!</p>
+
+@for (item of items; track item) {
+  <p>- {{ item }}</p>
+}
+
+<input [(ngModel)]="itemToAdd" type="text" />
+<button (click)="addItem()">Add item</button>
+<button (click)="updateServiceList()">Update Original List</button>

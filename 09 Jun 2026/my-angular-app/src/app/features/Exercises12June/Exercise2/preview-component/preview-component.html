@@ -1,0 +1,6 @@
+<p>preview-component works!</p>
+
+<div class="previewBox" [class.dark]="userPreferencesService.darkTheme()">
+  <p>Actual theme: {{ userPreferencesService.darkTheme() ? 'Dark' : 'Light' }}</p>
+  <p>Welcome: {{ userPreferencesService.username() }}</p>
+</div>

@@ -1,0 +1,12 @@
+<p>add-item-component works!</p>
+
+<div>
+  <!-- Sul file TS del medesimo componente (addItemComponent, in questo caso), aggiungiamo imports: [FormsModule] per avere [(ngModel)] che crea un collegamento bidirezionale tra input e proprietà TS -->
+
+  <label>Add a product</label>
+  <input type="text" placeholder="Type a product here" [(ngModel)]="productName" />
+
+  <!-- Al click eseguiamo la funzione onAddItem() EVENT BINDING -->
+
+  <button (click)="onAddItem()">Add item</button>
+</div>
