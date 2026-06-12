@@ -16,6 +16,8 @@ import { FatherComponent } from './features/InputOutputExample/father-component/
 import { SignalExampleComponent } from './features/signal-example-component/signal-example-component';
 import { TrafficLightComponent } from './features/Exercises11May/SignalExe/traffic-light-component/traffic-light-component';
 import { PriceComponent } from './features/Exercises11May/SignalExe/price-component/price-component';
+import { ProductListComponent } from './features/InputOutputExample/Exercise/product-list-component/product-list-component';
+import { FeedbackComponent } from './features/InputOutputExample/Exercise/feedback-component/feedback-component';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,8 @@ import { PriceComponent } from './features/Exercises11May/SignalExe/price-compon
     SignalExampleComponent,
     TrafficLightComponent,
     PriceComponent,
+    ProductListComponent,
+    FeedbackComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

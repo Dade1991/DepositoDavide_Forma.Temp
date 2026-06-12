@@ -1,1 +1,11 @@
 <p>product-card-component works!</p>
+
+<div class="card">
+  <h4>Product Details:</h4>
+
+  <!-- Leggo i valori dei Signals e li restituisco -->
+
+  <p>Product name: {{ nameSignal() }}</p>
+  <p>Product price: {{ priceSignal() }} €</p>
+  <p>Product availability: {{ availableSignal() ? `Available` : `Not available` }}</p>
+</div>

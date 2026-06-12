@@ -9,7 +9,19 @@ import { Component, input } from '@angular/core';
 export class ProductCardComponent {
   // Inzializzo gli input Signals
 
+  // input() crea un INPUT REATTIVO (Signal) che riceve dati dal parent (Padre)
+
+  // Inizializzo stringa vuota
+
   nameSignal = input<string>('');
+
+  // Inizializzo numero a 0
+
   priceSignal = input<number>(0);
-  availableSignal = input<boolean>(true);
+
+  // Inizializzo boolean a false
+
+  availableSignal = input<boolean>(false);
 }
+
+// NB: i SIGNALS devono essere richiamati come funzioni, non come variabili

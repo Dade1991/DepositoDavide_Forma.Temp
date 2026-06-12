@@ -1,1 +1,10 @@
 <p>feedback-component works!</p>
+
+<app-star-rating-component
+  [maxVote]="5"
+  (selectedVote)="onVote($event)"
+></app-star-rating-component>
+
+<!-- Mostro il risultato scelto dallo user -->
+
+<p>You have give a rating of: {{ vote }}</p>

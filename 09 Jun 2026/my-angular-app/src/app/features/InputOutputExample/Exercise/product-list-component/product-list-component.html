@@ -1,1 +1,14 @@
 <p>product-list-component works!</p>
+
+<!-- Ciclo l'Array dei prodotti per la generazione delle cards dei singoli prodotti -->
+
+@for (product of productsArray; track product.name) {
+  <!-- Binding degli input -->
+
+  <app-product-card-component
+    [nameSignal]="product.name"
+    [priceSignal]="product.price"
+    [availableSignal]="product.available"
+  >
+  </app-product-card-component>
+}

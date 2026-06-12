@@ -1,1 +1,9 @@
 <p>star-rating-component works!</p>
+
+<div>
+  <!-- Cliclo l'array di stars (min 0 max 5) ed imposto il risultato scelto dall'utente. -->
+
+  @for (star of starsArray.slice(0, maxVote()); track star) {
+    <span class="star" (click)="chooseVote(star)">★</span>
+  }
+</div>
